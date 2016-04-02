@@ -1,6 +1,6 @@
 {
   "name": "wechat-mp-sdk",
-  "version": "1.0.0",
+  "version": "0.1.1",
   "description": "",
   "main": "./lib/index.js",
   "scripts": {
@@ -8,17 +8,15 @@
   },
   "repository": {
     "type": "git",
-    "url": "git@github.com:heineiuo/node-wechat-mp-sdk"
+    "url": "git@github.com:heineiuo/wechat-mp-sdk"
   },
   "author": "",
   "license": "MIT",
   "dependencies": {
     "babel-plugin-transform-runtime": "~6.6.0",
     "body-parser": "~1.15.0",
-    "express": "~4.13.4",
     "htmlparser": "~1.7.7",
     "lodash": "~4.6.1",
-    "morgan": "~1.7.0",
     "mustache": "~2.2.1",
     "request": "~2.69.0",
     "seashell": "~0.2.9",
