@@ -1,2 +1,5 @@
 # keep
 !.keep
+
+.idea
+node_modules
