@@ -1,4 +1,7 @@
-import htmlparser from 'htmlparser'
+import xml2json from 'xml2json'
+import _ from 'lodash'
+import sha1 from 'sha1'
+
 
 /**
  * 服务器设置检查
@@ -12,8 +15,8 @@ const receiveCheck = function(config){
     var echostr = query.echostr
 
     return new Promise(function (resolve, reject){
-      var tmpStr = sha1(_.sortBy([config.token, timestamp, nonce]).join(''))
-      console.log(_.sortBy([config.token, timestamp, nonce]))
+      var tmpStr = sha1(_.sortBy([config.Token, timestamp, nonce]).join(''))
+      console.log(_.sortBy([config.Token, timestamp, nonce]))
       console.log('[tmpStr] '+tmpStr)
       console.log('[signature] '+signature)
       if (signature === tmpStr) {
@@ -34,7 +37,7 @@ const receiveMsg = function(config){
   return function(body) {
     return new Promise(function(resolve, reject){
       try {
-        const parsed = htmlparser(body)
+        const parsed = xml2json(body)
         resolve(parsed)
       } catch(e){
         reject(e)

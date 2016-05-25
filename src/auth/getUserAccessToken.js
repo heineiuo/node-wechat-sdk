@@ -15,8 +15,8 @@ const getUserAccessToken = function(core){
 
       try {
         let response = await awaitify2(request)({
-          url: URL + '?appid='+APPID+'&secret='+SECRET+'&code='+CODE+'&grant_type=authorization_code',
-          method: 'GET'
+          url: `${URL}?appid=${APPID}&secret=${SECRET}&code=${CODE}&grant_type=authorization_code`,
+          method: `GET`
         })
 
         var resData = JSON.parse(response[1])

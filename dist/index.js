@@ -1,2 +1,2616 @@
-!function(e){function t(r){if(n[r])return n[r].exports;var a=n[r]={exports:{},id:r,loaded:!1};return e[r].call(a.exports,a,a.exports,t),a.loaded=!0,a.exports}var n={};return t.m=e,t.c=n,t.p="",t(0)}([function(e,exports,t){"use strict";function n(e){return e&&e.__esModule?e:{"default":e}}Object.defineProperty(exports,"__esModule",{value:!0});var r=t(1),a=n(r),i=t(2),s=n(i),o=t(3),c=n(o),u=t(20),l=n(u),f=t(27),d=n(f),p=t(31),h=n(p),_=t(33),g=n(_),y=t(38),m=n(y),v=t(41),w=n(v),k=function(e){s["default"].ok("object"==("undefined"==typeof e?"undefined":(0,a["default"])(e)),"[wechat sdk] lost param config"),s["default"].ok("string"==typeof e.AppID,"[wechat sdk] lost param: config.AppID");var t=(0,c["default"])(e),n={};return n.core=t,n.kf=(0,l["default"])(t),n.menu=(0,d["default"])(t),n.auth=(0,g["default"])(t),n.media=(0,w["default"])(t),n.ChatMsg=(0,h["default"])(t),n.TemplateMsg=(0,m["default"])(t),n};exports["default"]=k},function(e,exports){e.exports=require("babel-runtime/helpers/typeof")},function(e,exports){e.exports=require("assert")},function(e,exports,t){"use strict";function n(e){return e&&e.__esModule?e:{"default":e}}Object.defineProperty(exports,"__esModule",{value:!0});var r=t(4),a=n(r),i=t(16),s=n(i),o=t(17),c=function(e){return{config:e,updateConfig:function(e){this.config.AppSecret=e.AppSecret,this.config.Token=e.Token,this.config.EncodingAESKey=e.EncodingAESKey},receiveMsg:(0,o.receiveMsg)(e),receiveCheck:(0,o.receiveCheck)(e),errcode:s["default"],getAccessToken:(0,a["default"])(e)}};exports["default"]=c},function(e,exports,t){"use strict";function n(e){return e&&e.__esModule?e:{"default":e}}Object.defineProperty(exports,"__esModule",{value:!0});var r=t(5),a=n(r),i=t(6),s=n(i),o=t(7),c=n(o),u=t(8),l=n(u),f=t(9),d=n(f),p=t(14),h=(n(p),"https://api.weixin.qq.com/cgi-bin/token"),_=function(e){return function(){return new c["default"](function(){var t=(0,s["default"])(a["default"].mark(function n(t,r){var i,s,o,c,u,f;return a["default"].wrap(function(n){for(;;)switch(n.prev=n.next){case 0:return n.prev=0,i={grant_type:"client_credential",appid:e.AppID,secret:"APPSECRET"},console.log("[wechat sdk] Start getting access_token..."),n.next=5,d["default"].findOne({AppID:i.appid});case 5:if(s=n.sent,console.log("doc"),console.log(s),s){n.next=12;break}return n.next=11,d["default"].insert(e);case 11:s=n.sent;case 12:if(console.log(s),i.secret=s.AppSecret,console.log("[wechat sdk] Secret: "+s.AppSecret),!(Date.now()<s.accessTokenExpire)){n.next=17;break}return n.abrupt("return",t(s.accessToken));case 17:return n.next=19,(0,p.awaitify2)(l["default"])({method:"GET",url:h,qs:i});case 19:return o=n.sent,c=JSON.parse(o[1]).access_token,u={accessToken:c,accessTokenExpire:Date.now()+7164e3},console.log("[wechat sdk] update token..."),n.prev=23,n.next=26,d["default"].update({AppID:i.appid},{$set:u});case 26:f=n.sent,n.next=35;break;case 29:n.prev=29,n.t0=n["catch"](23),console.log("===================="),console.log(n.t0),console.log(n.t0.stack),console.log("====================");case 35:console.log(f),console.log("[wechat sdk] update token success."),t(u.accessToken),n.next=43;break;case 40:n.prev=40,n.t1=n["catch"](0),r(n.t1);case 43:case"end":return n.stop()}},n,this,[[0,40],[23,29]])}));return function(e,n){return t.apply(this,arguments)}}())}};exports["default"]=_},function(e,exports){e.exports=require("babel-runtime/regenerator")},function(e,exports){e.exports=require("babel-runtime/helpers/asyncToGenerator")},function(e,exports){e.exports=require("babel-runtime/core-js/promise")},function(e,exports){e.exports=require("request")},function(e,exports,t){"use strict";function n(e){return e&&e.__esModule?e:{"default":e}}Object.defineProperty(exports,"__esModule",{value:!0});var r=t(10),a=n(r),i=new a["default"]({filename:"./data/Account.db",autoload:!0});exports["default"]=i},function(e,exports,t){"use strict";function n(e){for(var t={nedb:e},n=["loadDatabase","insert","find","findOne","count","update","remove","ensureIndex","removeIndex"],r=0;r<n.length;++r){var a=n[r];t[a]=i(e[a].bind(e))}return t.cfind=function(t,n){var r=e.find(t,n);return r.exec=i(r.exec.bind(r)),r},t.cfindOne=function(t,n){var r=e.findOne(t,n);return r.exec=i(r.exec.bind(r)),r},t.ccount=function(t){var n=e.count(t);return n.exec=i(n.exec.bind(n)),n},t}function r(e){var t=new a(e);return n(t)}var a=t(11),i=t(12);r.datastore=r,r.fromInstance=n,e.exports=r},function(e,exports){e.exports=require("nedb")},function(module,exports,__webpack_require__){"use strict";function thenify($$__fn__$$){return assert("function"==typeof $$__fn__$$),eval(createWrapper($$__fn__$$.name.replace(/\s|bound(?!$)/g,"")))}function createCallback(e,t){return function(n,r){if(n)return t(n);var a=arguments.length;if(2>=a)return e(r);for(var i=new Array(a-1),s=1;a>s;++s)i[s-1]=arguments[s];e(i)}}function createWrapper(e,t){return t=t?'var lastType = typeof arguments[len - 1]\nif (lastType === "function") return $$__fn__$$.apply(self, arguments)\n':"","(function "+(e||"")+"() {\nvar self = this\nvar len = arguments.length\n"+t+"var args = new Array(len + 1)\nfor (var i = 0; i < len; ++i) args[i] = arguments[i]\nvar lastIndex = i\nreturn new Promise(function (resolve, reject) {\nargs[lastIndex] = createCallback(resolve, reject)\n$$__fn__$$.apply(self, args)\n})\n})"}var Promise=__webpack_require__(13),assert=__webpack_require__(2);module.exports=thenify,thenify.withCallback=function($$__fn__$$){return assert("function"==typeof $$__fn__$$),eval(createWrapper($$__fn__$$.name,!0))}},function(e,exports){e.exports=require("any-promise")},function(e,exports,t){"use strict";function n(e){return e&&e.__esModule?e:{"default":e}}Object.defineProperty(exports,"__esModule",{value:!0}),exports.awaitify2=void 0;var r=t(5),a=n(r),i=t(7),s=n(i),o=t(6),c=n(o),u=t(15),l=n(u),f=function(e){return(0,c["default"])(a["default"].mark(function t(){var n,r=arguments;return a["default"].wrap(function(t){for(;;)switch(t.prev=t.next){case 0:return n=Array.prototype.slice.call(r,0),t.abrupt("return",new s["default"](function(t,r){var a=(0,l["default"])(e).apply(this,n);a(function(e){return e?(console.log("[awaitify] err: "+e),console.log(e.stack),r(e)):void t.apply(this,Array.prototype.slice.call(arguments,1))})}));case 2:case"end":return t.stop()}},t,this)}))},d=function(e){return function(){var t=Array.prototype.slice.call(arguments,0);return new s["default"](function(n,r){var a=function(e){if(console.log("[awaitify2] callback..."),e)return console.log("[awaitify2] err "+e),console.log(e.stack),r(e);var t=Array.prototype.slice.call(arguments,1);return 0==t.length?n(!0):1==t.length?n(t[0]):void n(t)};t.push(a),console.log(t),e.apply(e,t)})}};exports["default"]=f,exports.awaitify2=d},function(e,exports){e.exports=require("thunkify")},function(e,exports){"use strict";Object.defineProperty(exports,"__esModule",{value:!0});var t={"-1":"系统繁忙，此时请开发者稍候再试",40001:"获取access_token时AppSecret错误，或者access_token无效。请开发者认真比对AppSecret的正确性，或查看是否正在为恰当的公众号调用接口",40002:"不合法的凭证类型",40003:"不合法的OpenID，请开发者确认OpenID（该用户）是否已关注公众号，或是否是其他公众号的OpenID",40004:"不合法的媒体文件类型",40005:"不合法的文件类型",40006:"不合法的文件大小",40007:"不合法的媒体文件id",40008:"不合法的消息类型",40009:"不合法的图片文件大小",40010:"不合法的语音文件大小",40011:"不合法的视频文件大小",40012:"不合法的缩略图文件大小",40013:"不合法的AppID，请开发者检查AppID的正确性，避免异常字符，注意大小写",40014:"不合法的access_token，请开发者认真比对access_token的有效性（如是否过期），或查看是否正在为恰当的公众号调用接口",40015:"不合法的菜单类型",40016:"不合法的按钮个数",40017:"不合法的按钮个数",40018:"不合法的按钮名字长度",40019:"不合法的按钮KEY长度",40020:"不合法的按钮URL长度",40021:"不合法的菜单版本号",40022:"不合法的子菜单级数",40023:"不合法的子菜单按钮个数",40024:"不合法的子菜单按钮类型",40025:"不合法的子菜单按钮名字长度",40026:"不合法的子菜单按钮KEY长度",40027:"不合法的子菜单按钮URL长度",40028:"不合法的自定义菜单使用用户",40029:"不合法的oauth_code",40030:"不合法的refresh_token",40031:"不合法的openid列表",40032:"不合法的openid列表长度",40033:"不合法的请求字符，不能包含\\uxxxx格式的字符",40035:"不合法的参数",40038:"不合法的请求格式",40039:"不合法的URL长度",40050:"不合法的分组id",40051:"分组名字不合法",40117:"分组名字不合法",40118:"media_id大小不合法",40119:"button类型错误",40120:"button类型错误",40121:"不合法的media_id类型",40132:"微信号不合法",40137:"不支持的图片格式",41001:"缺少access_token参数",41002:"缺少appid参数",41003:"缺少refresh_token参数",41004:"缺少secret参数",41005:"缺少多媒体文件数据",41006:"缺少media_id参数",41007:"缺少子菜单数据",41008:"缺少oauth code",41009:"缺少openid",42001:"access_token超时，请检查access_token的有效期，请参考基础支持-获取access_token中，对access_token的详细机制说明",42002:"refresh_token超时",42003:"oauth_code超时",43001:"需要GET请求",43002:"需要POST请求",43003:"需要HTTPS请求",43004:"需要接收者关注",43005:"需要好友关系",44001:"多媒体文件为空",44002:"POST的数据包为空",44003:"图文消息内容为空",44004:"文本消息内容为空",45001:"多媒体文件大小超过限制",45002:"消息内容超过限制",45003:"标题字段超过限制",45004:"描述字段超过限制",45005:"链接字段超过限制",45006:"图片链接字段超过限制",45007:"语音播放时间超过限制",45008:"图文消息超过限制",45009:"接口调用超过限制",45010:"创建菜单个数超过限制",45015:"回复时间超过限制",45016:"系统分组，不允许修改",45017:"分组名字过长",45018:"分组数量超过上限",46001:"不存在媒体数据",46002:"不存在的菜单版本",46003:"不存在的菜单数据",46004:"不存在的用户",47001:"解析JSON/XML内容错误",48001:"api功能未授权，请确认公众号已获得该接口，可以在公众平台官网-开发者中心页中查看接口权限",50001:"用户未授权该api",50002:"用户受限，可能是违规后接口被封禁",61451:"参数错误(invalid parameter)",61452:"无效客服账号(invalid kf_account)",61453:"客服帐号已存在(kf_account exsited)",61454:"客服帐号名长度超过限制(仅允许10个英文字符，不包括@及@后的公众号的微信号)(invalid kf_acount length)",61455:"客服帐号名包含非法字符(仅允许英文+数字)(illegal character in kf_account)",61456:"客服帐号个数超过限制(10个客服账号)(kf_account count exceeded)",61457:"无效头像文件类型(invalid file type)",61450:"系统错误(system error)",61500:"日期格式错误",61501:"日期范围错误",9001001:"POST数据参数不合法",9001002:"远端服务不可用",9001003:"Ticket不合法",9001004:"获取摇周边用户信息失败",9001005:"获取商户信息失败",9001006:"获取OpenID失败",9001007:"上传文件缺失",9001008:"上传素材的文件类型不合法",9001009:"上传素材的文件尺寸不合法",9001010:"上传失败",9001020:"帐号不合法",9001021:"已有设备激活率低于50%，不能新增设备",9001022:"设备申请数不合法，必须为大于0的数字",9001023:"已存在审核中的设备ID申请",9001024:"一次查询设备ID数量不能超过50",9001025:"设备ID不合法",9001026:"页面ID不合法",9001027:"页面参数不合法",9001028:"一次删除页面ID数量不能超过10",9001029:"页面已应用在设备中，请先解除应用关系再删除",9001030:"一次查询页面ID数量不能超过50",9001031:"时间区间不合法",9001032:"保存设备与页面的绑定关系参数错误",9001033:"门店ID不合法",9001034:"设备备注信息过长",9001035:"设备申请参数不合法",9001036:"查询起始值begin不合法"};exports["default"]=t},function(e,exports,t){"use strict";function n(e){return e&&e.__esModule?e:{"default":e}}Object.defineProperty(exports,"__esModule",{value:!0}),exports.receiveCheck=exports.receiveMsg=void 0;var r=t(7),a=n(r),i=t(18),s=n(i),o=function(e){return function(t){var n=t.signature,r=t.timestamp,i=t.nonce,s=t.echostr;return new a["default"](function(t,a){var o=sha1(_.sortBy([e.token,r,i]).join(""));console.log(_.sortBy([e.token,r,i])),console.log("[tmpStr] "+o),console.log("[signature] "+n),n===o?t(s):a(new Error("receive check fail"))})}},c=function(e){return function(e){return new a["default"](function(t,n){try{var r=(0,s["default"])(e);t(r)}catch(a){n(a)}})}};exports.receiveMsg=c,exports.receiveCheck=o},function(e,exports,t){(function(e,n,r){"use strict";function a(e){return e&&e.__esModule?e:{"default":e}}var i=t(1),s=a(i);!function(){function t(){return"object"==(0,s["default"])(exports)&&"object"==(0,s["default"])(e)&&"string"==typeof n&&"string"==typeof r}function a(e,t){this._options=t?t:{},void 0==this._options.includeLocation&&(this._options.includeLocation=!1),this.validateHandler(e),this._handler=e,this.reset()}function i(e){i.super_.call(this,e,{ignoreWhitespace:!0,verbose:!1,enforceEmptyTags:!1})}function o(e,t){this.reset(),this._options=t?t:{},void 0==this._options.ignoreWhitespace&&(this._options.ignoreWhitespace=!1),void 0==this._options.verbose&&(this._options.verbose=!0),void 0==this._options.enforceEmptyTags&&(this._options.enforceEmptyTags=!0),"function"==typeof e&&(this._callback=e)}function c(e,t){var n=function(){};n.prototype=t.prototype,e.super_=t,e.prototype=new n,e.prototype.constructor=e}if(!t()){if(this.Tautologistics){if(this.Tautologistics.NodeHtmlParser)return}else this.Tautologistics={};this.Tautologistics.NodeHtmlParser={},exports=this.Tautologistics.NodeHtmlParser}var u={Text:"text",Directive:"directive",Comment:"comment",Script:"script",Style:"style",Tag:"tag"};a._reTrim=/(^\s+|\s+$)/g,a._reTrimComment=/(^\!--|--$)/g,a._reWhitespace=/\s/g,a._reTagName=/^\s*(\/?)\s*([^\s\/]+)/,a._reAttrib=/([^=<>\"\'\s]+)\s*=\s*"([^"]*)"|([^=<>\"\'\s]+)\s*=\s*'([^']*)'|([^=<>\"\'\s]+)\s*=\s*([^'"\s]+)|([^=<>\"\'\s\/]+)/g,a._reTags=/[\<\>]/g,a.prototype.parseComplete=function(e){this.reset(),this.parseChunk(e),this.done()},a.prototype.parseChunk=function(e){this._done&&this.handleError(new Error("Attempted to parse chunk after parsing already done")),this._buffer+=e,this.parseTags()},a.prototype.done=function(){if(!this._done){if(this._done=!0,this._buffer.length){var e=this._buffer;this._buffer="";var t={raw:e,data:this._parseState==u.Text?e:e.replace(a._reTrim,""),type:this._parseState};this._parseState!=u.Tag&&this._parseState!=u.Script&&this._parseState!=u.Style||(t.name=this.parseTagName(t.data)),this.parseAttribs(t),this._elements.push(t)}this.writeHandler(),this._handler.done()}},a.prototype.reset=function(){this._buffer="",this._done=!1,this._elements=[],this._elementsCurrent=0,this._current=0,this._next=0,this._location={row:0,col:0,charOffset:0,inBuffer:0},this._parseState=u.Text,this._prevTagSep="",this._tagStack=[],this._handler.reset()},a.prototype._options=null,a.prototype._handler=null,a.prototype._buffer=null,a.prototype._done=!1,a.prototype._elements=null,a.prototype._elementsCurrent=0,a.prototype._current=0,a.prototype._next=0,a.prototype._location=null,a.prototype._parseState=u.Text,a.prototype._prevTagSep="",a.prototype._tagStack=null,a.prototype.parseTagAttribs=function(e){for(var t=e.length,n=0;t>n;){var r=e[n++];r.type!=u.Tag&&r.type!=u.Script&&r.type!=u.style||this.parseAttribs(r)}return e},a.prototype.parseAttribs=function(e){if(e.type==u.Script||e.type==u.Style||e.type==u.Tag){var t=e.data.split(a._reWhitespace,1)[0],n=e.data.substring(t.length);if(!(n.length<1)){var r;for(a._reAttrib.lastIndex=0;r=a._reAttrib.exec(n);)void 0==e.attribs&&(e.attribs={}),"string"==typeof r[1]&&r[1].length?e.attribs[r[1]]=r[2]:"string"==typeof r[3]&&r[3].length?e.attribs[r[3].toString()]=r[4].toString():"string"==typeof r[5]&&r[5].length?e.attribs[r[5]]=r[6]:"string"==typeof r[7]&&r[7].length&&(e.attribs[r[7]]=r[7])}}},a.prototype.parseTagName=function(e){if(null==e||""==e)return"";var t=a._reTagName.exec(e);return t?(t[1]?"/":"")+t[2]:""},a.prototype.parseTags=function(){for(var e=this._buffer.length-1;a._reTags.test(this._buffer);){this._next=a._reTags.lastIndex-1;var t=this._buffer.charAt(this._next),n=this._buffer.substring(this._current,this._next),r={raw:n,data:this._parseState==u.Text?n:n.replace(a._reTrim,""),type:this._parseState},i=this.parseTagName(r.data);if(this._tagStack.length)if(this._tagStack[this._tagStack.length-1]==u.Script){if("/script"==i.toLowerCase())this._tagStack.pop();else if(0!=r.raw.indexOf("!--")&&(r.type=u.Text,this._elements.length&&this._elements[this._elements.length-1].type==u.Text)){var s=this._elements[this._elements.length-1];s.raw=s.data=s.raw+this._prevTagSep+r.raw,r.raw=r.data=""}}else if(this._tagStack[this._tagStack.length-1]==u.Style){if("/style"==i.toLowerCase())this._tagStack.pop();else if(0!=r.raw.indexOf("!--"))if(r.type=u.Text,this._elements.length&&this._elements[this._elements.length-1].type==u.Text){var s=this._elements[this._elements.length-1];""!=r.raw?(s.raw=s.data=s.raw+this._prevTagSep+r.raw,r.raw=r.data=""):s.raw=s.data=s.raw+this._prevTagSep}else""!=r.raw&&(r.raw=r.data=r.raw)}else if(this._tagStack[this._tagStack.length-1]==u.Comment){var o=r.raw.length;if("-"==r.raw.charAt(o-2)&&"-"==r.raw.charAt(o-1)&&">"==t)if(this._tagStack.pop(),this._elements.length&&this._elements[this._elements.length-1].type==u.Comment){var s=this._elements[this._elements.length-1];s.raw=s.data=(s.raw+r.raw).replace(a._reTrimComment,""),r.raw=r.data="",r.type=u.Text}else r.type=u.Comment;else if(r.type=u.Comment,this._elements.length&&this._elements[this._elements.length-1].type==u.Comment){var s=this._elements[this._elements.length-1];s.raw=s.data=s.raw+r.raw+t,r.raw=r.data="",r.type=u.Text}else r.raw=r.data=r.raw+t}if(r.type==u.Tag){r.name=i;var c=i.toLowerCase();if(0==r.raw.indexOf("!--")){r.type=u.Comment,delete r.name;var o=r.raw.length;"-"==r.raw.charAt(o-1)&&"-"==r.raw.charAt(o-2)&&">"==t?r.raw=r.data=r.raw.replace(a._reTrimComment,""):(r.raw+=t,this._tagStack.push(u.Comment))}else 0==r.raw.indexOf("!")||0==r.raw.indexOf("?")?r.type=u.Directive:"script"==c?(r.type=u.Script,"/"!=r.data.charAt(r.data.length-1)&&this._tagStack.push(u.Script)):"/script"==c?r.type=u.Script:"style"==c?(r.type=u.Style,"/"!=r.data.charAt(r.data.length-1)&&this._tagStack.push(u.Style)):"/style"==c&&(r.type=u.Style);r.name&&"/"==r.name.charAt(0)&&(r.data=r.name)}""==r.raw&&r.type==u.Text||(this._options.includeLocation&&!r.location&&(r.location=this.getLocation(r.type==u.Tag)),this.parseAttribs(r),this._elements.push(r),r.type!=u.Text&&r.type!=u.Comment&&r.type!=u.Directive&&"/"==r.data.charAt(r.data.length-1)&&this._elements.push({raw:"/"+r.name,data:"/"+r.name,name:"/"+r.name,type:r.type})),this._parseState="<"==t?u.Tag:u.Text,this._current=this._next+1,this._prevTagSep=t}this._options.includeLocation&&(this.getLocation(),this._location.row+=this._location.inBuffer,this._location.inBuffer=0,this._location.charOffset=0),this._buffer=this._current<=e?this._buffer.substring(this._current):"",this._current=0,this.writeHandler()},a.prototype.getLocation=function(e){for(var t,n=this._location,r=this._current-(e?1:0),a=e&&0==n.charOffset&&0==this._current;n.charOffset<r;n.charOffset++)t=this._buffer.charAt(n.charOffset),"\n"==t?(n.inBuffer++,n.col=0):"\r"!=t&&n.col++;return{line:n.row+n.inBuffer+1,col:n.col+(a?0:1)}},a.prototype.validateHandler=function(e){if("object"!=("undefined"==typeof e?"undefined":(0,s["default"])(e)))throw new Error("Handler is not an object");if("function"!=typeof e.reset)throw new Error("Handler method 'reset' is invalid");if("function"!=typeof e.done)throw new Error("Handler method 'done' is invalid");if("function"!=typeof e.writeTag)throw new Error("Handler method 'writeTag' is invalid");if("function"!=typeof e.writeText)throw new Error("Handler method 'writeText' is invalid");if("function"!=typeof e.writeComment)throw new Error("Handler method 'writeComment' is invalid");if("function"!=typeof e.writeDirective)throw new Error("Handler method 'writeDirective' is invalid")},a.prototype.writeHandler=function(e){if(e=!!e,!this._tagStack.length||e)for(;this._elements.length;){var t=this._elements.shift();switch(t.type){case u.Comment:this._handler.writeComment(t);break;case u.Directive:this._handler.writeDirective(t);break;case u.Text:this._handler.writeText(t);break;default:this._handler.writeTag(t)}}},a.prototype.handleError=function(e){if("function"!=typeof this._handler.error)throw e;this._handler.error(e)},c(i,o),i.prototype.done=function(){var e,t={},n=l.getElementsByTagName(function(e){return"rss"==e||"feed"==e},this.dom,!1);if(n.length&&(e=n[0]),e){if("rss"==e.name){t.type="rss",e=e.children[0],t.id="";try{t.title=l.getElementsByTagName("title",e.children,!1)[0].children[0].data}catch(r){}try{t.link=l.getElementsByTagName("link",e.children,!1)[0].children[0].data}catch(r){}try{t.description=l.getElementsByTagName("description",e.children,!1)[0].children[0].data}catch(r){}try{t.updated=new Date(l.getElementsByTagName("lastBuildDate",e.children,!1)[0].children[0].data)}catch(r){}try{t.author=l.getElementsByTagName("managingEditor",e.children,!1)[0].children[0].data}catch(r){}t.items=[],l.getElementsByTagName("item",e.children).forEach(function(e,n,r){var a={};try{a.id=l.getElementsByTagName("guid",e.children,!1)[0].children[0].data}catch(i){}try{a.title=l.getElementsByTagName("title",e.children,!1)[0].children[0].data}catch(i){}try{a.link=l.getElementsByTagName("link",e.children,!1)[0].children[0].data}catch(i){}try{a.description=l.getElementsByTagName("description",e.children,!1)[0].children[0].data}catch(i){}try{a.pubDate=new Date(l.getElementsByTagName("pubDate",e.children,!1)[0].children[0].data)}catch(i){}t.items.push(a)})}else{t.type="atom";try{t.id=l.getElementsByTagName("id",e.children,!1)[0].children[0].data}catch(r){}try{t.title=l.getElementsByTagName("title",e.children,!1)[0].children[0].data}catch(r){}try{t.link=l.getElementsByTagName("link",e.children,!1)[0].attribs.href}catch(r){}try{t.description=l.getElementsByTagName("subtitle",e.children,!1)[0].children[0].data}catch(r){}try{t.updated=new Date(l.getElementsByTagName("updated",e.children,!1)[0].children[0].data)}catch(r){}try{t.author=l.getElementsByTagName("email",e.children,!0)[0].children[0].data}catch(r){}t.items=[],l.getElementsByTagName("entry",e.children).forEach(function(e,n,r){var a={};try{a.id=l.getElementsByTagName("id",e.children,!1)[0].children[0].data}catch(i){}try{a.title=l.getElementsByTagName("title",e.children,!1)[0].children[0].data}catch(i){}try{a.link=l.getElementsByTagName("link",e.children,!1)[0].attribs.href}catch(i){}try{a.description=l.getElementsByTagName("summary",e.children,!1)[0].children[0].data}catch(i){}try{a.pubDate=new Date(l.getElementsByTagName("updated",e.children,!1)[0].children[0].data)}catch(i){}t.items.push(a)})}this.dom=t}i.super_.prototype.done.call(this)},o._emptyTags={area:1,base:1,basefont:1,br:1,col:1,frame:1,hr:1,img:1,input:1,isindex:1,link:1,meta:1,param:1,embed:1},o.reWhitespace=/^\s*$/,o.prototype.dom=null,o.prototype.reset=function(){this.dom=[],this._done=!1,this._tagStack=[],this._tagStack.last=function(){return this.length?this[this.length-1]:null}},o.prototype.done=function(){this._done=!0,this.handleCallback(null)},o.prototype.writeTag=function(e){this.handleElement(e)},o.prototype.writeText=function(e){this._options.ignoreWhitespace&&o.reWhitespace.test(e.data)||this.handleElement(e)},o.prototype.writeComment=function(e){this.handleElement(e)},o.prototype.writeDirective=function(e){this.handleElement(e)},o.prototype.error=function(e){this.handleCallback(e)},o.prototype._options=null,o.prototype._callback=null,o.prototype._done=!1,o.prototype._tagStack=null,o.prototype.handleCallback=function(e){if("function"==typeof this._callback)this._callback(e,this.dom);else if(e)throw e},o.prototype.isEmptyTag=function(e){var t=e.name.toLowerCase();return"/"==t.charAt(0)&&(t=t.substring(1)),this._options.enforceEmptyTags&&!!o._emptyTags[t]},o.prototype.handleElement=function(e){if(this._done&&this.handleCallback(new Error("Writing to the handler after done() called is not allowed without a reset()")),this._options.verbose||(delete e.raw,"tag"!=e.type&&"script"!=e.type&&"style"!=e.type||delete e.data),this._tagStack.last())if(e.type!=u.Text&&e.type!=u.Comment&&e.type!=u.Directive)if("/"==e.name.charAt(0)){var t=e.name.substring(1);if(!this.isEmptyTag(e)){for(var n=this._tagStack.length-1;n>-1&&this._tagStack[n--].name!=t;);if(n>-1||this._tagStack[0].name==t)for(;n<this._tagStack.length-1;)this._tagStack.pop()}}else this._tagStack.last().children||(this._tagStack.last().children=[]),this._tagStack.last().children.push(e),this.isEmptyTag(e)||this._tagStack.push(e);else this._tagStack.last().children||(this._tagStack.last().children=[]),this._tagStack.last().children.push(e);else e.type!=u.Text&&e.type!=u.Comment&&e.type!=u.Directive?"/"!=e.name.charAt(0)&&(this.dom.push(e),this.isEmptyTag(e)||this._tagStack.push(e)):this.dom.push(e)};var l={testElement:function(e,t){if(!t)return!1;for(var n in e)if("tag_name"==n){if("tag"!=t.type&&"script"!=t.type&&"style"!=t.type)return!1;if(!e.tag_name(t.name))return!1}else if("tag_type"==n){if(!e.tag_type(t.type))return!1}else if("tag_contains"==n){if("text"!=t.type&&"comment"!=t.type&&"directive"!=t.type)return!1;if(!e.tag_contains(t.data))return!1}else if(!t.attribs||!e[n](t.attribs[n]))return!1;return!0},getElements:function(e,t,n,r){function a(e){return function(t){return t==e}}if(n=void 0===n||null===n||!!n,r=isNaN(parseInt(r))?-1:parseInt(r),!t)return[];var i,s=[];for(var o in e)"function"!=typeof e[o]&&(e[o]=a(e[o]));if(l.testElement(e,t)&&s.push(t),r>=0&&s.length>=r)return s;if(n&&t.children)i=t.children;else{if(!(t instanceof Array))return s;i=t}for(var c=0;c<i.length&&(s=s.concat(l.getElements(e,i[c],n,r)),!(r>=0&&s.length>=r));c++);return s},getElementById:function(e,t,n){var r=l.getElements({id:e},t,n,1);return r.length?r[0]:null},getElementsByTagName:function(e,t,n,r){return l.getElements({tag_name:e},t,n,r)},getElementsByTagType:function(e,t,n,r){return l.getElements({tag_type:e},t,n,r)}};exports.Parser=a,exports.DefaultHandler=o,exports.RssHandler=i,exports.ElementType=u,exports.DomUtils=l}()}).call(exports,t(19)(e),"/index.js","/")},function(e,exports){"use strict";e.exports=function(e){return e.webpackPolyfill||(e.deprecate=function(){},e.paths=[],e.children=[],e.webpackPolyfill=1),e}},function(e,exports,t){"use strict";function n(e){return e&&e.__esModule?e:{"default":e}}Object.defineProperty(exports,"__esModule",{value:!0});var r=t(21),a=n(r),i=t(22),s=n(i),o=t(23),c=n(o),u=t(24),l=n(u),f=t(25),d=n(f),p=t(26),h=n(p),_=function(e){return{addAccount:(0,a["default"])(e),deleteAccount:(0,s["default"])(e),getList:(0,c["default"])(e),sendMsg:(0,l["default"])(e),updateAccount:(0,d["default"])(e),uploadAvatar:(0,h["default"])(e)}};exports["default"]=_},function(e,exports){"use strict";Object.defineProperty(exports,"__esModule",{value:!0});var t=function(e){return function(e){}};exports["default"]=t},function(e,exports,t){"use strict";function n(e){return e&&e.__esModule?e:{"default":e}}Object.defineProperty(exports,"__esModule",{value:!0});var r=t(7),a=n(r),i=function(e){return function(e){return new a["default"](function(e,t){try{e(1)}catch(n){t(n)}})}};exports["default"]=i},function(e,exports,t){"use strict";function n(e){return e&&e.__esModule?e:{"default":e}}Object.defineProperty(exports,"__esModule",{value:!0});var r=t(5),a=n(r),i=t(7),s=n(i),o=t(6),c=n(o),u=t(3),l=n(u),f=t(8),d=n(f),p=function(){var e=(0,c["default"])(a["default"].mark(function t(){return a["default"].wrap(function(e){for(;;)switch(e.prev=e.next){case 0:return e.abrupt("return",new s["default"](function(){var e=(0,c["default"])(a["default"].mark(function t(e,n){var r,i;return a["default"].wrap(function(t){for(;;)switch(t.prev=t.next){case 0:return t.prev=0,t.next=3,l["default"].getAccessToken();case 3:return r=t.sent,t.next=6,(0,d["default"])({access_token:r});case 6:i=t.sent,e(i),t.next=13;break;case 10:t.prev=10,t.t0=t["catch"](0),n(t.t0);case 13:case"end":return t.stop()}},t,this,[[0,10]])}));return function(t,n){return e.apply(this,arguments)}}()));case 1:case"end":return e.stop()}},t,this)}));return function(){return e.apply(this,arguments)}}();exports["default"]=p},function(e,exports,t){"use strict";function n(e){return e&&e.__esModule?e:{"default":e}}Object.defineProperty(exports,"__esModule",{value:!0});var r=t(5),a=n(r),i=t(6),s=n(i),o=t(7),c=n(o),u=function(e){return function(t){return new c["default"](function(){var t=(0,s["default"])(a["default"].mark(function n(t,r){var i;return a["default"].wrap(function(n){for(;;)switch(n.prev=n.next){case 0:return n.prev=0,n.next=3,e.getAccessToken();case 3:i=n.sent,t(1),n.next=10;break;case 7:n.prev=7,n.t0=n["catch"](0),r(n.t0);case 10:case"end":return n.stop()}},n,this,[[0,7]])}));return function(e,n){return t.apply(this,arguments)}}())}};exports["default"]=u},function(e,exports,t){"use strict";function n(e){return e&&e.__esModule?e:{"default":e}}Object.defineProperty(exports,"__esModule",{value:!0});var r=t(7),a=n(r),i=function(e){return function(e){return new a["default"](function(e,t){try{e(1)}catch(n){t(n)}})}};exports["default"]=i},function(e,exports,t){"use strict";function n(e){return e&&e.__esModule?e:{"default":e}}Object.defineProperty(exports,"__esModule",{value:!0});var r=t(7),a=n(r),i=function(e){return function(e){return new a["default"](function(e,t){try{e(n)}catch(n){t(n)}})}};exports["default"]=i},function(e,exports,t){"use strict";function n(e){return e&&e.__esModule?e:{"default":e}}Object.defineProperty(exports,"__esModule",{value:!0});var r=t(28),a=n(r),i=t(29),s=n(i),o=function(e){return{getMenu:(0,a["default"])(e),createMenu:(0,s["default"])(e)}};exports["default"]=o},function(e,exports,t){"use strict";function n(e){return e&&e.__esModule?e:{"default":e}}Object.defineProperty(exports,"__esModule",{value:!0});var r=t(5),a=n(r),i=t(6),s=n(i),o=t(7),c=n(o),u=t(8),l=n(u),f=t(14),d=(n(f),"GET"),p="https://api.weixin.qq.com/cgi-bin/menu/get",h=function(e){return function(){return new c["default"](function(){var t=(0,s["default"])(a["default"].mark(function n(t,r){var i,s,o;return a["default"].wrap(function(n){for(;;)switch(n.prev=n.next){case 0:return n.prev=0,console.log("[wechat sdk] Start getting menu..."),n.next=4,e.getAccessToken();case 4:return n.t0=n.sent,i={access_token:n.t0},console.log("[wechat sdk] access_token : "+i.access_token),n.next=9,(0,f.awaitify2)(l["default"])({method:d,url:p,qs:i});case 9:if(s=n.sent,o=JSON.parse(s[1]),!o.errcode){n.next=13;break}return n.abrupt("return",r(o));case 13:t(o),n.next=19;break;case 16:n.prev=16,n.t1=n["catch"](0),r(n.t1);case 19:case"end":return n.stop()}},n,this,[[0,16]])}));return function(e,n){return t.apply(this,arguments)}}())}};exports["default"]=h},function(e,exports,t){"use strict";function n(e){return e&&e.__esModule?e:{"default":e}}Object.defineProperty(exports,"__esModule",{value:!0});var r=t(5),a=n(r),i=t(30),s=n(i),o=t(6),c=n(o),u=t(7),l=n(u),f=t(8),d=n(f),p=t(14),h=(n(p),"POST"),_="https://api.weixin.qq.com/cgi-bin/menu/create",g=function(e){return function(t){return new l["default"](function(){var n=(0,c["default"])(a["default"].mark(function r(n,i){var o,c,u;return a["default"].wrap(function(r){for(;;)switch(r.prev=r.next){case 0:return r.prev=0,o=(0,s["default"])(t),r.t0=h,r.t1=_,r.next=6,e.getAccessToken();case 6:return r.t2=r.sent,r.t3={access_token:r.t2},r.t4=o,r.t5={method:r.t0,url:r.t1,qs:r.t3,body:r.t4},r.next=12,(0,p.awaitify2)(d["default"])(r.t5);case 12:if(c=r.sent,console.log("[wechatsdk] createMenu response:"),u=JSON.parse(c[1]),!u.errcode){r.next=17;break}return r.abrupt("return",i(u));case 17:n(u),r.next=23;break;case 20:r.prev=20,r.t6=r["catch"](0),i(r.t6);case 23:case"end":return r.stop()}},r,this,[[0,20]])}));return function(e,t){return n.apply(this,arguments)}}())}};exports["default"]=g},function(e,exports){e.exports=require("babel-runtime/core-js/json/stringify")},function(e,exports,t){"use strict";function n(e){return e&&e.__esModule?e:{"default":e}}Object.defineProperty(exports,"__esModule",{value:!0});var r=t(32),a=n(r),i=function(e){return{passiveReply:(0,a["default"])(e)}};exports["default"]=i},function(e,exports,t){"use strict";function n(e){return e&&e.__esModule?e:{"default":e}}Object.defineProperty(exports,"__esModule",{value:!0});var r=t(7),a=n(r),i=function(e){return function(e){return new a["default"](function(e,t){try{e(1)}catch(n){t(n)}})}};exports["default"]=i},function(e,exports,t){"use strict";function n(e){return e&&e.__esModule?e:{"default":e}}Object.defineProperty(exports,"__esModule",{value:!0});var r=t(34),a=n(r),i=t(35),s=n(i),o=t(36),c=n(o),u=t(37),l=n(u),f=function(e){return{getUserAccessToken:(0,a["default"])(e),freshUserAccessToken:(0,s["default"])(e),getUserInfo:(0,l["default"])(e),generateUrl:(0,c["default"])(e)}};exports["default"]=f},function(e,exports,t){"use strict";function n(e){return e&&e.__esModule?e:{"default":e}}Object.defineProperty(exports,"__esModule",{value:!0});var r=t(5),a=n(r),i=t(6),s=n(i),o=t(7),c=n(o),u=t(8),l=n(u),f=t(14),d=(n(f),"https://api.weixin.qq.com/sns/oauth2/access_token"),p=function(e){return function(t){return new c["default"](function(){var n=(0,s["default"])(a["default"].mark(function r(n,i){var s,o,c,u,p;return a["default"].wrap(function(r){for(;;)switch(r.prev=r.next){case 0:return s=t,o=e.config.AppID,c=e.config.AppSecret,r.prev=3,r.next=6,(0,f.awaitify2)(l["default"])({url:d+"?appid="+o+"&secret="+c+"&code="+s+"&grant_type=authorization_code",method:"GET"});case 6:if(u=r.sent,p=JSON.parse(u[1]),!p.errcode){r.next=10;break}return r.abrupt("return",i(p));case 10:n(p),r.next=16;break;case 13:r.prev=13,r.t0=r["catch"](3),i(r.t0);case 16:case"end":return r.stop()}},r,this,[[3,13]])}));return function(e,t){return n.apply(this,arguments);
-}}())}};exports["default"]=p},function(e,exports,t){"use strict";function n(e){return e&&e.__esModule?e:{"default":e}}Object.defineProperty(exports,"__esModule",{value:!0});var r=t(5),a=n(r),i=t(6),s=n(i),o=t(7),c=n(o),u=t(8),l=n(u),f=t(14),d="GET",p="https://api.weixin.qq.com/sns/oauth2/refresh_toke",h=function(e){return function(t){return new c["default"](function(){var n=(0,s["default"])(a["default"].mark(function r(n,i){var s,o,c;return a["default"].wrap(function(r){for(;;)switch(r.prev=r.next){case 0:if(r.prev=0,s={appid:e.config.AppID,fresh_token:t.fresh_token,grant_type:"refresh_token"},o=(0,f.awaitify2)(l["default"])({qs:s,url:p,method:d}),c=JSON.parse(o[1]),!c.errcode){r.next=6;break}return r.abrupt("return",i(c));case 6:n(c),r.next=12;break;case 9:r.prev=9,r.t0=r["catch"](0),i(r.t0);case 12:case"end":return r.stop()}},r,this,[[0,9]])}));return function(e,t){return n.apply(this,arguments)}}())}};exports["default"]=h},function(e,exports){"use strict";Object.defineProperty(exports,"__esModule",{value:!0});var t=function(e){return function(t){var n=e.config.AppID,r=t;return"https://open.weixin.qq.com/connect/oauth2/authorize?appid="+n+"&redirect_uri="+r+"&response_type=code&scope=snsapi_userinfo&connect_redirect=1#wechat_redirect"}};exports["default"]=t},function(e,exports,t){"use strict";function n(e){return e&&e.__esModule?e:{"default":e}}Object.defineProperty(exports,"__esModule",{value:!0});var r=t(5),a=n(r),i=t(6),s=n(i),o=t(7),c=n(o),u=t(8),l=n(u),f=t(14),d=(n(f),"GET"),p="https://api.weixin.qq.com/sns/userinfo",h=function(e){return function(){var e=arguments.length<=0||void 0===arguments[0]?{lang:"zh_CN"}:arguments[0];return new c["default"](function(){var t=(0,s["default"])(a["default"].mark(function n(t,r){var i,s,o;return a["default"].wrap(function(n){for(;;)switch(n.prev=n.next){case 0:return n.prev=0,i={openid:e.openid,access_token:e.access_token,lang:e.lang},n.next=4,(0,f.awaitify2)(l["default"])({method:d,url:p,qs:i});case 4:if(s=n.sent,o=JSON.parse(s[1]),!o.errcode){n.next=8;break}return n.abrupt("return",r(o));case 8:t(o),n.next=14;break;case 11:n.prev=11,n.t0=n["catch"](0),r(n.t0);case 14:case"end":return n.stop()}},n,this,[[0,11]])}));return function(e,n){return t.apply(this,arguments)}}())}};exports["default"]=h},function(e,exports,t){"use strict";function n(e){return e&&e.__esModule?e:{"default":e}}Object.defineProperty(exports,"__esModule",{value:!0});var r=t(39),a=t(40),i=n(a),s=function(e){return{sendMsg:(0,r.sendMsg)(e),setIndustry:(0,r.sendMsg)(i["default"])}};exports["default"]=s},function(e,exports,t){"use strict";function n(e){return e&&e.__esModule?e:{"default":e}}Object.defineProperty(exports,"__esModule",{value:!0}),exports.sendMsg=void 0;var r=t(5),a=n(r),i=t(6),s=n(i),o=t(7),c=n(o),u=t(8),l=n(u),f="POST",d="https://api.weixin.qq.com/cgi-bin/message/template/send",p=function(e){return function(t){return new c["default"](function(){var t=(0,s["default"])(a["default"].mark(function n(t,r){var i;return a["default"].wrap(function(n){for(;;)switch(n.prev=n.next){case 0:return n.t0=f,n.t1=d,n.next=4,e.getAccessToken();case 4:return n.t2=n.sent,n.t3={method:n.t0,url:n.t1,access_token:n.t2},n.next=8,(0,l["default"])(n.t3);case 8:i=n.sent,i.body.success?t(!0):r(i.body);case 10:case"end":return n.stop()}},n,this)}));return function(e,n){return t.apply(this,arguments)}}())}};exports.sendMsg=p},function(e,exports,t){"use strict";function n(e){return e&&e.__esModule?e:{"default":e}}Object.defineProperty(exports,"__esModule",{value:!0});var r=t(7),a=n(r),i=function(e){return function(e){return new a["default"](function(e,t){try{e(1)}catch(n){t(n)}})}};exports["default"]=i},function(e,exports,t){"use strict";Object.defineProperty(exports,"__esModule",{value:!0});var n=t(42),r=t(43),a=function(e){return{addNews:(0,n.addNews)(e),uploadMaterial:(0,n.uploadMaterial)(e),uploadNewsImage:(0,n.uploadNewsImage)(e),updateNews:(0,n.updateNews)(e),getMaterialUrl:(0,n.getMaterialUrl)(e),downloadMaterial:(0,n.downloadMaterial)(e),getMaterialCount:(0,n.getMaterialCount)(e),getMaterialList:(0,n.getMaterialList)(e),deleteMaterial:(0,n.deleteMaterial)(e),uploadTempMedia:(0,r.uploadTempMedia)(e),getTempMediaUrl:(0,r.getTempMediaUrl)(e),downloadTempMedia:(0,r.downloadTempMedia)(e)}};exports["default"]=a},function(e,exports,t){"use strict";function n(e){return e&&e.__esModule?e:{"default":e}}Object.defineProperty(exports,"__esModule",{value:!0}),exports.deleteMaterial=exports.getMaterialList=exports.getMaterialCount=exports.downloadMaterial=exports.getMaterialUrl=exports.updateNews=exports.uploadNewsImage=exports.uploadMaterial=exports.addNews=void 0;var r=t(5),a=n(r),i=t(30),s=n(i),o=t(6),c=n(o),u=t(7),l=n(u),f=t(8),d=n(f),p=t(14),h=function(e){},_=function(e){},g=function(e){},y=function(e){},m=function(e){var t="https://api.weixin.qq.com/cgi-bin/material/batchget_material";return function(n){return new l["default"](function(){var r=(0,c["default"])(a["default"].mark(function i(r,o){var c,u,l,f;return a["default"].wrap(function(a){for(;;)switch(a.prev=a.next){case 0:return a.prev=0,a.next=3,e.getAccessToken();case 3:return c=a.sent,u=(0,s["default"])(n),a.next=7,(0,p.awaitify2)(d["default"])({method:"POST",url:t,qs:{access_token:c},body:u});case 7:if(l=a.sent,console.log("[wechat sdk] get response from getMaterialList..."),console.log(l[1]),f=JSON.parse(l[1]),!f.errcode){a.next=13;break}return a.abrupt("return",o(f));case 13:r(f),a.next=19;break;case 16:a.prev=16,a.t0=a["catch"](0),o(a.t0);case 19:case"end":return a.stop()}},i,this,[[0,16]])}));return function(e,t){return r.apply(this,arguments)}}())}},v=function(e){},w=function(e){},k=function(e){},b=function(e){};exports.addNews=h,exports.uploadMaterial=w,exports.uploadNewsImage=g,exports.updateNews=_,exports.getMaterialUrl=k,exports.downloadMaterial=b,exports.getMaterialCount=y,exports.getMaterialList=m,exports.deleteMaterial=v},function(e,exports){"use strict";Object.defineProperty(exports,"__esModule",{value:!0});var t=function(e){},n=function(e){},r=function(e){};exports.uploadTempMedia=t,exports.getTempMediaUrl=n,exports.downloadTempMedia=r}]);
+module.exports =
+/******/ (function(modules) { // webpackBootstrap
+/******/ 	// The module cache
+/******/ 	var installedModules = {};
+
+/******/ 	// The require function
+/******/ 	function __webpack_require__(moduleId) {
+
+/******/ 		// Check if module is in cache
+/******/ 		if(installedModules[moduleId])
+/******/ 			return installedModules[moduleId].exports;
+
+/******/ 		// Create a new module (and put it into the cache)
+/******/ 		var module = installedModules[moduleId] = {
+/******/ 			exports: {},
+/******/ 			id: moduleId,
+/******/ 			loaded: false
+/******/ 		};
+
+/******/ 		// Execute the module function
+/******/ 		modules[moduleId].call(module.exports, module, module.exports, __webpack_require__);
+
+/******/ 		// Flag the module as loaded
+/******/ 		module.loaded = true;
+
+/******/ 		// Return the exports of the module
+/******/ 		return module.exports;
+/******/ 	}
+
+
+/******/ 	// expose the modules object (__webpack_modules__)
+/******/ 	__webpack_require__.m = modules;
+
+/******/ 	// expose the module cache
+/******/ 	__webpack_require__.c = installedModules;
+
+/******/ 	// __webpack_public_path__
+/******/ 	__webpack_require__.p = "";
+
+/******/ 	// Load entry module and return exports
+/******/ 	return __webpack_require__(0);
+/******/ })
+/************************************************************************/
+/******/ ([
+/* 0 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _typeof2 = __webpack_require__(1);
+
+	var _typeof3 = _interopRequireDefault(_typeof2);
+
+	var _assert = __webpack_require__(2);
+
+	var _assert2 = _interopRequireDefault(_assert);
+
+	var _core = __webpack_require__(3);
+
+	var _core2 = _interopRequireDefault(_core);
+
+	var _kf = __webpack_require__(30);
+
+	var _kf2 = _interopRequireDefault(_kf);
+
+	var _menu = __webpack_require__(37);
+
+	var _menu2 = _interopRequireDefault(_menu);
+
+	var _chatMsg = __webpack_require__(40);
+
+	var _chatMsg2 = _interopRequireDefault(_chatMsg);
+
+	var _Auth = __webpack_require__(42);
+
+	var _Auth2 = _interopRequireDefault(_Auth);
+
+	var _templateMsg = __webpack_require__(47);
+
+	var _templateMsg2 = _interopRequireDefault(_templateMsg);
+
+	var _Media = __webpack_require__(50);
+
+	var _Media2 = _interopRequireDefault(_Media);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var WeChatSDK = function WeChatSDK(config) {
+
+	  _assert2.default.ok((typeof config === 'undefined' ? 'undefined' : (0, _typeof3.default)(config)) == 'object', '[wechat sdk] lost param config');
+	  _assert2.default.ok(typeof config.AppID == 'string', '[wechat sdk] lost param: config.AppID');
+
+	  var core = (0, _core2.default)(config);
+	  var sdk = {};
+	  sdk.core = core;
+	  sdk.kf = (0, _kf2.default)(core);
+	  sdk.menu = (0, _menu2.default)(core);
+	  sdk.auth = (0, _Auth2.default)(core);
+	  sdk.media = (0, _Media2.default)(core);
+	  sdk.ChatMsg = (0, _chatMsg2.default)(core);
+	  sdk.TemplateMsg = (0, _templateMsg2.default)(core);
+
+	  return sdk;
+	};
+
+	exports.default = WeChatSDK;
+	module.exports = exports['default'];
+
+/***/ },
+/* 1 */
+/***/ function(module, exports) {
+
+	module.exports = require("babel-runtime/helpers/typeof");
+
+/***/ },
+/* 2 */
+/***/ function(module, exports) {
+
+	module.exports = require("assert");
+
+/***/ },
+/* 3 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _getAccessToken = __webpack_require__(4);
+
+	var _getAccessToken2 = _interopRequireDefault(_getAccessToken);
+
+	var _errcode = __webpack_require__(16);
+
+	var _errcode2 = _interopRequireDefault(_errcode);
+
+	var _receive = __webpack_require__(17);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var Core = function Core(config) {
+	  return {
+	    config: config,
+	    updateConfig: function updateConfig(newConfig) {
+	      this.config.AppSecret = newConfig.AppSecret;
+	      this.config.Token = newConfig.Token;
+	      this.config.EncodingAESKey = newConfig.EncodingAESKey;
+	    },
+	    receiveMsg: (0, _receive.receiveMsg)(config),
+	    receiveCheck: (0, _receive.receiveCheck)(config),
+	    errcode: _errcode2.default,
+	    getAccessToken: (0, _getAccessToken2.default)(config)
+	  };
+	};
+
+	exports.default = Core;
+	module.exports = exports['default'];
+
+/***/ },
+/* 4 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _regenerator = __webpack_require__(5);
+
+	var _regenerator2 = _interopRequireDefault(_regenerator);
+
+	var _asyncToGenerator2 = __webpack_require__(6);
+
+	var _asyncToGenerator3 = _interopRequireDefault(_asyncToGenerator2);
+
+	var _promise = __webpack_require__(7);
+
+	var _promise2 = _interopRequireDefault(_promise);
+
+	var _request = __webpack_require__(8);
+
+	var _request2 = _interopRequireDefault(_request);
+
+	var _Account = __webpack_require__(9);
+
+	var _Account2 = _interopRequireDefault(_Account);
+
+	var _awaitify = __webpack_require__(14);
+
+	var _awaitify2 = _interopRequireDefault(_awaitify);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var URL = 'https://api.weixin.qq.com/cgi-bin/token';
+
+	/**
+	 * 获取access_token
+	 */
+	var getAccessToken = function getAccessToken(config) {
+	  return function () {
+	    return new _promise2.default(function () {
+	      var ref = (0, _asyncToGenerator3.default)(_regenerator2.default.mark(function _callee(resolve, reject) {
+	        var query, doc, response, access_token, newDoc, result;
+	        return _regenerator2.default.wrap(function _callee$(_context) {
+	          while (1) {
+	            switch (_context.prev = _context.next) {
+	              case 0:
+	                _context.prev = 0;
+	                query = {
+	                  grant_type: 'client_credential',
+	                  appid: config.AppID,
+	                  secret: 'APPSECRET'
+	                };
+
+
+	                console.log('[wechat sdk] Start getting access_token...');
+	                //
+	                // let findOne = awaitify2(Account.findOne)
+	                // console.log('findOne...')
+	                // console.log(findOne.toString())
+
+	                _context.next = 5;
+	                return _Account2.default.findOne({ AppID: query.appid });
+
+	              case 5:
+	                doc = _context.sent;
+
+
+	                console.log('doc');
+	                console.log(doc);
+
+	                if (doc) {
+	                  _context.next = 12;
+	                  break;
+	                }
+
+	                _context.next = 11;
+	                return _Account2.default.insert(config);
+
+	              case 11:
+	                doc = _context.sent;
+
+	              case 12:
+
+	                console.log(doc);
+
+	                query.secret = doc.AppSecret;
+
+	                console.log('[wechat sdk] Secret: ' + doc.AppSecret);
+
+	                if (!(Date.now() < doc.accessTokenExpire)) {
+	                  _context.next = 17;
+	                  break;
+	                }
+
+	                return _context.abrupt('return', resolve(doc.accessToken));
+
+	              case 17:
+	                _context.next = 19;
+	                return (0, _awaitify.awaitify2)(_request2.default)({
+	                  method: 'GET',
+	                  url: URL,
+	                  qs: query
+	                });
+
+	              case 19:
+	                response = _context.sent;
+	                access_token = JSON.parse(response[1]).access_token;
+	                newDoc = {
+	                  accessToken: access_token,
+	                  accessTokenExpire: Date.now() + (2 - 0.01) * 60 * 60 * 1000
+	                };
+
+	                console.log('[wechat sdk] update token...');
+
+	                _context.prev = 23;
+	                _context.next = 26;
+	                return _Account2.default.update({ AppID: query.appid }, { $set: newDoc });
+
+	              case 26:
+	                result = _context.sent;
+	                _context.next = 35;
+	                break;
+
+	              case 29:
+	                _context.prev = 29;
+	                _context.t0 = _context['catch'](23);
+
+	                console.log('====================');
+	                console.log(_context.t0);
+	                console.log(_context.t0.stack);
+	                console.log('====================');
+
+	              case 35:
+	                console.log(result);
+
+	                console.log('[wechat sdk] update token success.');
+	                resolve(newDoc.accessToken);
+	                _context.next = 43;
+	                break;
+
+	              case 40:
+	                _context.prev = 40;
+	                _context.t1 = _context['catch'](0);
+
+	                reject(_context.t1);
+
+	              case 43:
+	              case 'end':
+	                return _context.stop();
+	            }
+	          }
+	        }, _callee, this, [[0, 40], [23, 29]]);
+	      }));
+	      return function (_x, _x2) {
+	        return ref.apply(this, arguments);
+	      };
+	    }());
+	  };
+	};
+
+	exports.default = getAccessToken;
+	module.exports = exports['default'];
+
+/***/ },
+/* 5 */
+/***/ function(module, exports) {
+
+	module.exports = require("babel-runtime/regenerator");
+
+/***/ },
+/* 6 */
+/***/ function(module, exports) {
+
+	module.exports = require("babel-runtime/helpers/asyncToGenerator");
+
+/***/ },
+/* 7 */
+/***/ function(module, exports) {
+
+	module.exports = require("babel-runtime/core-js/promise");
+
+/***/ },
+/* 8 */
+/***/ function(module, exports) {
+
+	module.exports = require("request");
+
+/***/ },
+/* 9 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _nedbPromise = __webpack_require__(10);
+
+	var _nedbPromise2 = _interopRequireDefault(_nedbPromise);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var Account = new _nedbPromise2.default({
+	  filename: './data/Account.db',
+	  autoload: true
+	});
+
+	exports.default = Account;
+	module.exports = exports['default'];
+
+/***/ },
+/* 10 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var NedbDatastore = __webpack_require__(11);
+	var thenify = __webpack_require__(12);
+
+	function fromInstance(nedbInstance) {
+	  var newDB = { nedb: nedbInstance };
+
+	  var methods = ['loadDatabase', 'insert', 'find', 'findOne', 'count', 'update', 'remove', 'ensureIndex', 'removeIndex'];
+	  for (var i = 0; i < methods.length; ++i) {
+	    var m = methods[i];
+	    newDB[m] = thenify(nedbInstance[m].bind(nedbInstance));
+	  }
+
+	  newDB.cfind = function (query, projections) {
+	    var cursor = nedbInstance.find(query, projections);
+	    cursor.exec = thenify(cursor.exec.bind(cursor));
+	    return cursor;
+	  };
+
+	  newDB.cfindOne = function (query, projections) {
+	    var cursor = nedbInstance.findOne(query, projections);
+	    cursor.exec = thenify(cursor.exec.bind(cursor));
+	    return cursor;
+	  };
+
+	  newDB.ccount = function (query) {
+	    var cursor = nedbInstance.count(query);
+	    cursor.exec = thenify(cursor.exec.bind(cursor));
+	    return cursor;
+	  };
+
+	  return newDB;
+	}
+
+	function datastore(options) {
+	  var nedbInstance = new NedbDatastore(options);
+	  return fromInstance(nedbInstance);
+	}
+
+	// so that import { datastore } still works:
+	datastore.datastore = datastore;
+	datastore.fromInstance = fromInstance;
+
+	module.exports = datastore;
+
+/***/ },
+/* 11 */
+/***/ function(module, exports) {
+
+	module.exports = require("nedb");
+
+/***/ },
+/* 12 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var Promise = __webpack_require__(13);
+	var assert = __webpack_require__(2);
+
+	module.exports = thenify;
+
+	/**
+	 * Turn async functions into promises
+	 *
+	 * @param {Function} $$__fn__$$
+	 * @return {Function}
+	 * @api public
+	 */
+
+	function thenify($$__fn__$$) {
+	  assert(typeof $$__fn__$$ === 'function');
+	  return eval(createWrapper($$__fn__$$.name.replace(/\s|bound(?!$)/g, '')));
+	}
+
+	/**
+	 * Turn async functions into promises and backward compatible with callback
+	 *
+	 * @param {Function} $$__fn__$$
+	 * @return {Function}
+	 * @api public
+	 */
+
+	thenify.withCallback = function ($$__fn__$$) {
+	  assert(typeof $$__fn__$$ === 'function');
+	  return eval(createWrapper($$__fn__$$.name, true));
+	};
+
+	function createCallback(resolve, reject) {
+	  return function (err, value) {
+	    if (err) return reject(err);
+	    var length = arguments.length;
+	    if (length <= 2) return resolve(value);
+	    var values = new Array(length - 1);
+	    for (var i = 1; i < length; ++i) {
+	      values[i - 1] = arguments[i];
+	    }resolve(values);
+	  };
+	}
+
+	function createWrapper(name, withCallback) {
+	  withCallback = withCallback ? 'var lastType = typeof arguments[len - 1]\n' + 'if (lastType === "function") return $$__fn__$$.apply(self, arguments)\n' : '';
+
+	  return '(function ' + (name || '') + '() {\n' + 'var self = this\n' + 'var len = arguments.length\n' + withCallback + 'var args = new Array(len + 1)\n' + 'for (var i = 0; i < len; ++i) args[i] = arguments[i]\n' + 'var lastIndex = i\n' + 'return new Promise(function (resolve, reject) {\n' + 'args[lastIndex] = createCallback(resolve, reject)\n' + '$$__fn__$$.apply(self, args)\n' + '})\n' + '})';
+	}
+
+/***/ },
+/* 13 */
+/***/ function(module, exports) {
+
+	module.exports = require("any-promise");
+
+/***/ },
+/* 14 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.awaitify2 = undefined;
+
+	var _regenerator = __webpack_require__(5);
+
+	var _regenerator2 = _interopRequireDefault(_regenerator);
+
+	var _promise = __webpack_require__(7);
+
+	var _promise2 = _interopRequireDefault(_promise);
+
+	var _asyncToGenerator2 = __webpack_require__(6);
+
+	var _asyncToGenerator3 = _interopRequireDefault(_asyncToGenerator2);
+
+	var _thunkify = __webpack_require__(15);
+
+	var _thunkify2 = _interopRequireDefault(_thunkify);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var awaitify = function awaitify(fn) {
+	  return (0, _asyncToGenerator3.default)(_regenerator2.default.mark(function _callee() {
+	    var args,
+	        _args = arguments;
+	    return _regenerator2.default.wrap(function _callee$(_context) {
+	      while (1) {
+	        switch (_context.prev = _context.next) {
+	          case 0:
+	            args = Array.prototype.slice.call(_args, 0);
+	            return _context.abrupt('return', new _promise2.default(function (resolve, reject) {
+	              var thunked = (0, _thunkify2.default)(fn).apply(this, args);
+	              thunked(function (err) {
+	                if (err) {
+	                  console.log('[awaitify] err: ' + err);
+	                  console.log(err.stack);
+	                  return reject(err);
+	                }
+	                resolve.apply(this, Array.prototype.slice.call(arguments, 1));
+	              });
+	            }));
+
+	          case 2:
+	          case 'end':
+	            return _context.stop();
+	        }
+	      }
+	    }, _callee, this);
+	  }));
+	};
+
+	var awaitify2 = function awaitify2(fn) {
+	  return function () {
+	    var args = Array.prototype.slice.call(arguments, 0);
+	    return new _promise2.default(function (resolve, reject) {
+	      var callback = function callback(err) {
+	        console.log('[awaitify2] callback...');
+	        if (err) {
+	          console.log('[awaitify2] err ' + err);
+	          console.log(err.stack);
+	          return reject(err);
+	        }
+	        var result = Array.prototype.slice.call(arguments, 1);
+	        if (result.length == 0) return resolve(true);
+	        if (result.length == 1) return resolve(result[0]);
+	        resolve(result);
+	      };
+	      args.push(callback);
+	      console.log(args);
+	      fn.apply(fn, args);
+	    });
+	  };
+	};
+
+	exports.default = awaitify;
+	exports.awaitify2 = awaitify2;
+
+/***/ },
+/* 15 */
+/***/ function(module, exports) {
+
+	module.exports = require("thunkify");
+
+/***/ },
+/* 16 */
+/***/ function(module, exports) {
+
+	"use strict";
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	var errcode = {
+	  "-1": "系统繁忙，此时请开发者稍候再试",
+	  "40001": "获取access_token时AppSecret错误，或者access_token无效。请开发者认真比对AppSecret的正确性，或查看是否正在为恰当的公众号调用接口",
+	  "40002": "不合法的凭证类型",
+	  "40003": "不合法的OpenID，请开发者确认OpenID（该用户）是否已关注公众号，或是否是其他公众号的OpenID",
+	  "40004": "不合法的媒体文件类型",
+	  "40005": "不合法的文件类型",
+	  "40006": "不合法的文件大小",
+	  "40007": "不合法的媒体文件id",
+	  "40008": "不合法的消息类型",
+	  "40009": "不合法的图片文件大小",
+	  "40010": "不合法的语音文件大小",
+	  "40011": "不合法的视频文件大小",
+	  "40012": "不合法的缩略图文件大小",
+	  "40013": "不合法的AppID，请开发者检查AppID的正确性，避免异常字符，注意大小写",
+	  "40014": "不合法的access_token，请开发者认真比对access_token的有效性（如是否过期），或查看是否正在为恰当的公众号调用接口",
+	  "40015": "不合法的菜单类型",
+	  "40016": "不合法的按钮个数",
+	  "40017": "不合法的按钮个数",
+	  "40018": "不合法的按钮名字长度",
+	  "40019": "不合法的按钮KEY长度",
+	  "40020": "不合法的按钮URL长度",
+	  "40021": "不合法的菜单版本号",
+	  "40022": "不合法的子菜单级数",
+	  "40023": "不合法的子菜单按钮个数",
+	  "40024": "不合法的子菜单按钮类型",
+	  "40025": "不合法的子菜单按钮名字长度",
+	  "40026": "不合法的子菜单按钮KEY长度",
+	  "40027": "不合法的子菜单按钮URL长度",
+	  "40028": "不合法的自定义菜单使用用户",
+	  "40029": "不合法的oauth_code",
+	  "40030": "不合法的refresh_token",
+	  "40031": "不合法的openid列表",
+	  "40032": "不合法的openid列表长度",
+	  "40033": "不合法的请求字符，不能包含\\uxxxx格式的字符",
+	  "40035": "不合法的参数",
+	  "40038": "不合法的请求格式",
+	  "40039": "不合法的URL长度",
+	  "40050": "不合法的分组id",
+	  "40051": "分组名字不合法",
+	  "40117": "分组名字不合法",
+	  "40118": "media_id大小不合法",
+	  "40119": "button类型错误",
+	  "40120": "button类型错误",
+	  "40121": "不合法的media_id类型",
+	  "40132": "微信号不合法",
+	  "40137": "不支持的图片格式",
+	  "41001": "缺少access_token参数",
+	  "41002": "缺少appid参数",
+	  "41003": "缺少refresh_token参数",
+	  "41004": "缺少secret参数",
+	  "41005": "缺少多媒体文件数据",
+	  "41006": "缺少media_id参数",
+	  "41007": "缺少子菜单数据",
+	  "41008": "缺少oauth code",
+	  "41009": "缺少openid",
+	  "42001": "access_token超时，请检查access_token的有效期，请参考基础支持-获取access_token中，对access_token的详细机制说明",
+	  "42002": "refresh_token超时",
+	  "42003": "oauth_code超时",
+	  "43001": "需要GET请求",
+	  "43002": "需要POST请求",
+	  "43003": "需要HTTPS请求",
+	  "43004": "需要接收者关注",
+	  "43005": "需要好友关系",
+	  "44001": "多媒体文件为空",
+	  "44002": "POST的数据包为空",
+	  "44003": "图文消息内容为空",
+	  "44004": "文本消息内容为空",
+	  "45001": "多媒体文件大小超过限制",
+	  "45002": "消息内容超过限制",
+	  "45003": "标题字段超过限制",
+	  "45004": "描述字段超过限制",
+	  "45005": "链接字段超过限制",
+	  "45006": "图片链接字段超过限制",
+	  "45007": "语音播放时间超过限制",
+	  "45008": "图文消息超过限制",
+	  "45009": "接口调用超过限制",
+	  "45010": "创建菜单个数超过限制",
+	  "45015": "回复时间超过限制",
+	  "45016": "系统分组，不允许修改",
+	  "45017": "分组名字过长",
+	  "45018": "分组数量超过上限",
+	  "46001": "不存在媒体数据",
+	  "46002": "不存在的菜单版本",
+	  "46003": "不存在的菜单数据",
+	  "46004": "不存在的用户",
+	  "47001": "解析JSON/XML内容错误",
+	  "48001": "api功能未授权，请确认公众号已获得该接口，可以在公众平台官网-开发者中心页中查看接口权限",
+	  "50001": "用户未授权该api",
+	  "50002": "用户受限，可能是违规后接口被封禁",
+	  "61451": "参数错误(invalid parameter)",
+	  "61452": "无效客服账号(invalid kf_account)",
+	  "61453": "客服帐号已存在(kf_account exsited)",
+	  "61454": "客服帐号名长度超过限制(仅允许10个英文字符，不包括@及@后的公众号的微信号)(invalid kf_acount length)",
+	  "61455": "客服帐号名包含非法字符(仅允许英文+数字)(illegal character in kf_account)",
+	  "61456": "客服帐号个数超过限制(10个客服账号)(kf_account count exceeded)",
+	  "61457": "无效头像文件类型(invalid file type)",
+	  "61450": "系统错误(system error)",
+	  "61500": "日期格式错误",
+	  "61501": "日期范围错误",
+	  "9001001": "POST数据参数不合法",
+	  "9001002": "远端服务不可用",
+	  "9001003": "Ticket不合法",
+	  "9001004": "获取摇周边用户信息失败",
+	  "9001005": "获取商户信息失败",
+	  "9001006": "获取OpenID失败",
+	  "9001007": "上传文件缺失",
+	  "9001008": "上传素材的文件类型不合法",
+	  "9001009": "上传素材的文件尺寸不合法",
+	  "9001010": "上传失败",
+	  "9001020": "帐号不合法",
+	  "9001021": "已有设备激活率低于50%，不能新增设备",
+	  "9001022": "设备申请数不合法，必须为大于0的数字",
+	  "9001023": "已存在审核中的设备ID申请",
+	  "9001024": "一次查询设备ID数量不能超过50",
+	  "9001025": "设备ID不合法",
+	  "9001026": "页面ID不合法",
+	  "9001027": "页面参数不合法",
+	  "9001028": "一次删除页面ID数量不能超过10",
+	  "9001029": "页面已应用在设备中，请先解除应用关系再删除",
+	  "9001030": "一次查询页面ID数量不能超过50",
+	  "9001031": "时间区间不合法",
+	  "9001032": "保存设备与页面的绑定关系参数错误",
+	  "9001033": "门店ID不合法",
+	  "9001034": "设备备注信息过长",
+	  "9001035": "设备申请参数不合法",
+	  "9001036": "查询起始值begin不合法"
+	};
+
+	exports.default = errcode;
+	module.exports = exports['default'];
+
+/***/ },
+/* 17 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.receiveCheck = exports.receiveMsg = undefined;
+
+	var _promise = __webpack_require__(7);
+
+	var _promise2 = _interopRequireDefault(_promise);
+
+	var _xml2json = __webpack_require__(18);
+
+	var _xml2json2 = _interopRequireDefault(_xml2json);
+
+	var _lodash = __webpack_require__(28);
+
+	var _lodash2 = _interopRequireDefault(_lodash);
+
+	var _sha = __webpack_require__(29);
+
+	var _sha2 = _interopRequireDefault(_sha);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	/**
+	 * 服务器设置检查
+	 */
+	var receiveCheck = function receiveCheck(config) {
+	  return function (query) {
+
+	    var signature = query.signature;
+	    var timestamp = query.timestamp;
+	    var nonce = query.nonce;
+	    var echostr = query.echostr;
+
+	    return new _promise2.default(function (resolve, reject) {
+	      var tmpStr = (0, _sha2.default)(_lodash2.default.sortBy([config.Token, timestamp, nonce]).join(''));
+	      console.log(_lodash2.default.sortBy([config.Token, timestamp, nonce]));
+	      console.log('[tmpStr] ' + tmpStr);
+	      console.log('[signature] ' + signature);
+	      if (signature === tmpStr) {
+	        resolve(echostr);
+	      } else {
+	        reject(new Error('receive check fail'));
+	      }
+	    });
+	  };
+	};
+
+	/***
+	 * 接受消息并自动回复或转发到客服
+	 */
+	var receiveMsg = function receiveMsg(config) {
+
+	  return function (body) {
+	    return new _promise2.default(function (resolve, reject) {
+	      try {
+	        var parsed = (0, _xml2json2.default)(body);
+	        resolve(parsed);
+	      } catch (e) {
+	        reject(e);
+	      }
+	    });
+	  };
+	};
+
+	exports.receiveMsg = receiveMsg;
+	exports.receiveCheck = receiveCheck;
+
+/***/ },
+/* 18 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	module.exports = __webpack_require__(19);
+
+/***/ },
+/* 19 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var _exports = module.exports;
+
+	_exports.toJson = __webpack_require__(20);
+	_exports.toXml = __webpack_require__(27);
+
+/***/ },
+/* 20 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var _stringify = __webpack_require__(21);
+
+	var _stringify2 = _interopRequireDefault(_stringify);
+
+	var _keys = __webpack_require__(22);
+
+	var _keys2 = _interopRequireDefault(_keys);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var expat = __webpack_require__(23);
+	var sanitizer = __webpack_require__(24);
+	var joi = __webpack_require__(25);
+	var hoek = __webpack_require__(26);
+
+	// This object will hold the final result.
+	var obj = {};
+	var currentObject = {};
+	var ancestors = [];
+	var currentElementName = null;
+
+	var options = {}; //configuration options
+	function startElement(name, attrs) {
+	    currentElementName = name;
+	    if (options.coerce) {
+	        // Looping here in stead of making coerce generic as object walk is unnecessary
+	        for (var key in attrs) {
+	            attrs[key] = coerce(attrs[key], key);
+	        }
+	    }
+
+	    if (!(name in currentObject)) {
+	        if (options.arrayNotation) {
+	            currentObject[name] = [attrs];
+	        } else {
+	            currentObject[name] = attrs;
+	        }
+	    } else if (!(currentObject[name] instanceof Array)) {
+	        // Put the existing object in an array.
+	        var newArray = [currentObject[name]];
+	        // Add the new object to the array.
+	        newArray.push(attrs);
+	        // Point to the new array.
+	        currentObject[name] = newArray;
+	    } else {
+	        // An array already exists, push the attributes on to it.
+	        currentObject[name].push(attrs);
+	    }
+
+	    // Store the current (old) parent.
+	    ancestors.push(currentObject);
+
+	    // We are now working with this object, so it becomes the current parent.
+	    if (currentObject[name] instanceof Array) {
+	        // If it is an array, get the last element of the array.
+	        currentObject = currentObject[name][currentObject[name].length - 1];
+	    } else {
+	        // Otherwise, use the object itself.
+	        currentObject = currentObject[name];
+	    }
+	}
+
+	function text(data) {
+	    currentObject['$t'] = (currentObject['$t'] || '') + data;
+	}
+
+	function endElement(name) {
+	    if (currentObject['$t']) {
+	        if (options.trim) {
+	            currentObject['$t'] = currentObject['$t'].trim();
+	        }
+
+	        if (options.sanitize) {
+	            currentObject['$t'] = sanitizer.sanitize(currentObject['$t'], true);
+	        }
+
+	        currentObject['$t'] = coerce(currentObject['$t'], name);
+	    }
+
+	    if (currentElementName !== name) {
+	        delete currentObject['$t'];
+	    }
+	    // This should check to make sure that the name we're ending
+	    // matches the name we started on.
+	    var ancestor = ancestors.pop();
+	    if (!options.reversible) {
+	        if ('$t' in currentObject && (0, _keys2.default)(currentObject).length == 1) {
+	            if (ancestor[name] instanceof Array) {
+	                ancestor[name].push(ancestor[name].pop()['$t']);
+	            } else {
+	                ancestor[name] = currentObject['$t'];
+	            }
+	        }
+	    }
+
+	    currentObject = ancestor;
+	}
+
+	function coerce(value, key) {
+	    if (!options.coerce || value.trim() === '') {
+	        return value;
+	    }
+
+	    if (typeof options.coerce[key] === 'function') return options.coerce[key](value);
+
+	    var num = Number(value);
+	    if (!isNaN(num)) {
+	        return num;
+	    }
+
+	    var _value = value.toLowerCase();
+
+	    if (_value == 'true') {
+	        return true;
+	    }
+
+	    if (_value == 'false') {
+	        return false;
+	    }
+
+	    return value;
+	}
+
+	/**
+	 * Parses xml to json using node-expat.
+	 * @param {String|Buffer} xml The xml to be parsed to json.
+	 * @param {Object} _options An object with options provided by the user.
+	 * The available options are:
+	 *  - object: If true, the parser returns a Javascript object instead of
+	 *            a JSON string.
+	 *  - reversible: If true, the parser generates a reversible JSON, mainly
+	 *                characterized by the presence of the property $t.
+	 *  - sanitize_values: If true, the parser escapes any element value in the xml
+	 * that has any of the following characters: <, >, (, ), #, #, &, ", '.
+	 *
+	 * @return {String|Object} A String or an Object with the JSON representation
+	 * of the XML.
+	 */
+	module.exports = function (xml, _options) {
+
+	    _options = _options || {};
+	    var parser = new expat.Parser('UTF-8');
+
+	    parser.on('startElement', startElement);
+	    parser.on('text', text);
+	    parser.on('endElement', endElement);
+
+	    obj = currentObject = {};
+	    ancestors = [];
+	    currentElementName = null;
+
+	    var schema = {
+	        object: joi.boolean().default(false),
+	        reversible: joi.boolean().default(false),
+	        coerce: joi.alternatives([joi.boolean(), joi.object()]).default(false),
+	        sanitize: joi.boolean().default(true),
+	        trim: joi.boolean().default(true),
+	        arrayNotation: joi.boolean().default(false)
+	    };
+	    var validation = joi.validate(_options, schema);
+	    hoek.assert(validation.error === null, validation.error);
+	    options = validation.value;
+
+	    if (!parser.parse(xml)) {
+	        throw new Error('There are errors in your xml file: ' + parser.getError());
+	    }
+
+	    if (options.object) {
+	        return obj;
+	    }
+
+	    var json = (0, _stringify2.default)(obj);
+
+	    //See: http://timelessrepo.com/json-isnt-a-javascript-subset
+	    json = json.replace(/\u2028/g, '\\u2028').replace(/\u2029/g, '\\u2029');
+
+	    return json;
+	};
+
+/***/ },
+/* 21 */
+/***/ function(module, exports) {
+
+	module.exports = require("babel-runtime/core-js/json/stringify");
+
+/***/ },
+/* 22 */
+/***/ function(module, exports) {
+
+	module.exports = require("babel-runtime/core-js/object/keys");
+
+/***/ },
+/* 23 */
+/***/ function(module, exports) {
+
+	module.exports = require("node-expat");
+
+/***/ },
+/* 24 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var _keys = __webpack_require__(22);
+
+	var _keys2 = _interopRequireDefault(_keys);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	/**
+	 * Simple sanitization. It is not intended to sanitize
+	 * malicious element values.
+	 *
+	 * character | escaped
+	 *      <       &lt;
+	 *      >       &gt;
+	 *      (       &#40;
+	 *      )       &#41;
+	 *      #       &#35;
+	 *      &       &amp;
+	 *      "       &quot;
+	 *      '       &apos;
+	 */
+	var chars = {
+	    '&': '&amp;',
+	    '#': '&#35;',
+	    '<': '&lt;',
+	    '>': '&gt;',
+	    '(': '&#40;',
+	    ')': '&#41;',
+	    '"': '&quot;',
+	    "'": '&apos;'
+	};
+
+	function escapeRegExp(string) {
+	    return string.replace(/([.*+?^=!:${}()|\[\]\/\\])/g, "\\$1");
+	}
+
+	exports.sanitize = function sanitize(value, reverse) {
+	    if (typeof value !== 'string') {
+	        return value;
+	    }
+
+	    (0, _keys2.default)(chars).forEach(function (key) {
+	        if (reverse) {
+	            value = value.replace(new RegExp(escapeRegExp(chars[key]), 'g'), key);
+	        } else {
+	            value = value.replace(new RegExp(escapeRegExp(key), 'g'), chars[key]);
+	        }
+	    });
+
+	    return value;
+	};
+
+/***/ },
+/* 25 */
+/***/ function(module, exports) {
+
+	module.exports = require("joi");
+
+/***/ },
+/* 26 */
+/***/ function(module, exports) {
+
+	module.exports = require("hoek");
+
+/***/ },
+/* 27 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var _typeof2 = __webpack_require__(1);
+
+	var _typeof3 = _interopRequireDefault(_typeof2);
+
+	var _keys = __webpack_require__(22);
+
+	var _keys2 = _interopRequireDefault(_keys);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var sanitizer = __webpack_require__(24);
+
+	module.exports = function (json, options) {
+	    if (json instanceof Buffer) {
+	        json = json.toString();
+	    }
+
+	    var obj = null;
+	    if (typeof json == 'string') {
+	        try {
+	            obj = JSON.parse(json);
+	        } catch (e) {
+	            throw new Error("The JSON structure is invalid");
+	        }
+	    } else {
+	        obj = json;
+	    }
+	    var toXml = new ToXml(options);
+	    toXml.parse(obj);
+	    return toXml.xml;
+	};
+
+	ToXml.prototype.parse = function (obj) {
+	    var self = this;
+	    var keys = (0, _keys2.default)(obj);
+	    var len = keys.length;
+
+	    // First pass, extract strings only
+	    for (var i = 0; i < len; i++) {
+	        var key = keys[i],
+	            value = obj[key],
+	            isArray = Array.isArray(value);
+	        var type = typeof value === 'undefined' ? 'undefined' : (0, _typeof3.default)(value);
+	        if (type == 'string' || type == 'number' || type == 'boolean' || isArray) {
+	            var it = isArray ? value : [value];
+
+	            it.forEach(function (subVal) {
+	                if ((typeof subVal === 'undefined' ? 'undefined' : (0, _typeof3.default)(subVal)) != 'object') {
+	                    if (key == '$t') {
+	                        self.addTextContent(subVal);
+	                    } else {
+	                        self.addAttr(key, subVal);
+	                    }
+	                }
+	            });
+	        }
+	    }
+
+	    // Second path, now handle sub-objects and arrays
+	    for (var i = 0; i < len; i++) {
+	        var key = keys[i];
+
+	        if (Array.isArray(obj[key])) {
+	            var elems = obj[key];
+	            var l = elems.length;
+	            for (var j = 0; j < l; j++) {
+	                var elem = elems[j];
+
+	                if ((typeof elem === 'undefined' ? 'undefined' : (0, _typeof3.default)(elem)) == 'object') {
+	                    self.openTag(key);
+	                    self.parse(elem);
+	                    self.closeTag(key);
+	                }
+	            }
+	        } else if ((0, _typeof3.default)(obj[key]) == 'object') {
+	            self.openTag(key);
+	            self.parse(obj[key]);
+	            self.closeTag(key);
+	        }
+	    }
+	};
+
+	ToXml.prototype.openTag = function (key) {
+	    this.completeTag();
+	    this.xml += '<' + key;
+	    this.tagIncomplete = true;
+	};
+	ToXml.prototype.addAttr = function (key, val) {
+	    if (this.options.sanitize) {
+	        val = sanitizer.sanitize(val);
+	    }
+	    this.xml += ' ' + key + '="' + val + '"';
+	};
+	ToXml.prototype.addTextContent = function (text) {
+	    this.completeTag();
+	    this.xml += text;
+	};
+	ToXml.prototype.closeTag = function (key) {
+	    this.completeTag();
+	    this.xml += '</' + key + '>';
+	};
+	ToXml.prototype.completeTag = function () {
+	    if (this.tagIncomplete) {
+	        this.xml += '>';
+	        this.tagIncomplete = false;
+	    }
+	};
+	function ToXml(options) {
+	    var defaultOpts = {
+	        sanitize: false
+	    };
+
+	    if (options) {
+	        for (var opt in options) {
+	            defaultOpts[opt] = options[opt];
+	        }
+	    }
+
+	    this.options = defaultOpts;
+	    this.xml = '';
+	    this.tagIncomplete = false;
+	}
+
+/***/ },
+/* 28 */
+/***/ function(module, exports) {
+
+	module.exports = require("lodash");
+
+/***/ },
+/* 29 */
+/***/ function(module, exports) {
+
+	module.exports = require("sha1");
+
+/***/ },
+/* 30 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _addAccount = __webpack_require__(31);
+
+	var _addAccount2 = _interopRequireDefault(_addAccount);
+
+	var _deleteAccount = __webpack_require__(32);
+
+	var _deleteAccount2 = _interopRequireDefault(_deleteAccount);
+
+	var _getList = __webpack_require__(33);
+
+	var _getList2 = _interopRequireDefault(_getList);
+
+	var _sendMsg = __webpack_require__(34);
+
+	var _sendMsg2 = _interopRequireDefault(_sendMsg);
+
+	var _updateAccount = __webpack_require__(35);
+
+	var _updateAccount2 = _interopRequireDefault(_updateAccount);
+
+	var _uploadAvatar = __webpack_require__(36);
+
+	var _uploadAvatar2 = _interopRequireDefault(_uploadAvatar);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var kf = function kf(core) {
+	  return {
+
+	    addAccount: (0, _addAccount2.default)(core),
+	    deleteAccount: (0, _deleteAccount2.default)(core),
+	    getList: (0, _getList2.default)(core),
+	    sendMsg: (0, _sendMsg2.default)(core),
+	    updateAccount: (0, _updateAccount2.default)(core),
+	    uploadAvatar: (0, _uploadAvatar2.default)(core)
+	  };
+	};
+
+	exports.default = kf;
+	module.exports = exports['default'];
+
+/***/ },
+/* 31 */
+/***/ function(module, exports) {
+
+	"use strict";
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	// 添加客服帐号
+
+	var addAccount = function addAccount(core) {
+
+	  return function (options) {};
+	};
+
+	exports.default = addAccount;
+	module.exports = exports['default'];
+
+/***/ },
+/* 32 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _promise = __webpack_require__(7);
+
+	var _promise2 = _interopRequireDefault(_promise);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	// 删除客服帐号
+
+	var deleteAccount = function deleteAccount(core) {
+	  return function (options) {
+	    return new _promise2.default(function (resolve, reject) {
+
+	      try {
+	        resolve(1);
+	      } catch (e) {
+	        reject(e);
+	      }
+	    });
+	  };
+	};
+
+	exports.default = deleteAccount;
+	module.exports = exports['default'];
+
+/***/ },
+/* 33 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _regenerator = __webpack_require__(5);
+
+	var _regenerator2 = _interopRequireDefault(_regenerator);
+
+	var _promise = __webpack_require__(7);
+
+	var _promise2 = _interopRequireDefault(_promise);
+
+	var _asyncToGenerator2 = __webpack_require__(6);
+
+	var _asyncToGenerator3 = _interopRequireDefault(_asyncToGenerator2);
+
+	var _core = __webpack_require__(3);
+
+	var _core2 = _interopRequireDefault(_core);
+
+	var _request = __webpack_require__(8);
+
+	var _request2 = _interopRequireDefault(_request);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var URL = 'https://api.weixin.qq.com/cgi-bin/customservice/getkflist?access_token=ACCESS_TOKEN';
+
+	// 获取所有客服账号
+	var getList = function () {
+	  var ref = (0, _asyncToGenerator3.default)(_regenerator2.default.mark(function _callee2() {
+	    return _regenerator2.default.wrap(function _callee2$(_context2) {
+	      while (1) {
+	        switch (_context2.prev = _context2.next) {
+	          case 0:
+	            return _context2.abrupt('return', new _promise2.default(function () {
+	              var ref = (0, _asyncToGenerator3.default)(_regenerator2.default.mark(function _callee(resolve, reject) {
+	                var ACCESS_TOKEN, response;
+	                return _regenerator2.default.wrap(function _callee$(_context) {
+	                  while (1) {
+	                    switch (_context.prev = _context.next) {
+	                      case 0:
+	                        _context.prev = 0;
+	                        _context.next = 3;
+	                        return _core2.default.getAccessToken();
+
+	                      case 3:
+	                        ACCESS_TOKEN = _context.sent;
+	                        _context.next = 6;
+	                        return (0, _request2.default)({
+	                          access_token: ACCESS_TOKEN
+	                        });
+
+	                      case 6:
+	                        response = _context.sent;
+
+	                        resolve(response);
+	                        _context.next = 13;
+	                        break;
+
+	                      case 10:
+	                        _context.prev = 10;
+	                        _context.t0 = _context['catch'](0);
+
+	                        reject(_context.t0);
+
+	                      case 13:
+	                      case 'end':
+	                        return _context.stop();
+	                    }
+	                  }
+	                }, _callee, this, [[0, 10]]);
+	              }));
+	              return function (_x, _x2) {
+	                return ref.apply(this, arguments);
+	              };
+	            }()));
+
+	          case 1:
+	          case 'end':
+	            return _context2.stop();
+	        }
+	      }
+	    }, _callee2, this);
+	  }));
+	  return function getList() {
+	    return ref.apply(this, arguments);
+	  };
+	}();
+
+	exports.default = getList;
+	module.exports = exports['default'];
+
+/***/ },
+/* 34 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _regenerator = __webpack_require__(5);
+
+	var _regenerator2 = _interopRequireDefault(_regenerator);
+
+	var _asyncToGenerator2 = __webpack_require__(6);
+
+	var _asyncToGenerator3 = _interopRequireDefault(_asyncToGenerator2);
+
+	var _promise = __webpack_require__(7);
+
+	var _promise2 = _interopRequireDefault(_promise);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var METHOD = 'POST';
+	var URL = 'https://api.weixin.qq.com/cgi-bin/message/custom/send';
+
+	var sendMsg = function sendMsg(core) {
+	  return function (options) {
+
+	    return new _promise2.default(function () {
+	      var ref = (0, _asyncToGenerator3.default)(_regenerator2.default.mark(function _callee(resolve, reject) {
+	        var access_token;
+	        return _regenerator2.default.wrap(function _callee$(_context) {
+	          while (1) {
+	            switch (_context.prev = _context.next) {
+	              case 0:
+	                _context.prev = 0;
+	                _context.next = 3;
+	                return core.getAccessToken();
+
+	              case 3:
+	                access_token = _context.sent;
+
+
+	                resolve(1);
+	                _context.next = 10;
+	                break;
+
+	              case 7:
+	                _context.prev = 7;
+	                _context.t0 = _context['catch'](0);
+
+	                reject(_context.t0);
+
+	              case 10:
+	              case 'end':
+	                return _context.stop();
+	            }
+	          }
+	        }, _callee, this, [[0, 7]]);
+	      }));
+	      return function (_x, _x2) {
+	        return ref.apply(this, arguments);
+	      };
+	    }());
+	  };
+	};
+
+	exports.default = sendMsg;
+	module.exports = exports['default'];
+
+/***/ },
+/* 35 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _promise = __webpack_require__(7);
+
+	var _promise2 = _interopRequireDefault(_promise);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	// 修改客服帐号
+
+	var updateAccount = function updateAccount(core) {
+	  return function (options) {
+	    return new _promise2.default(function (resolve, reject) {
+
+	      try {
+	        resolve(1);
+	      } catch (e) {
+	        reject(e);
+	      }
+	    });
+	  };
+	};
+
+	exports.default = updateAccount;
+	module.exports = exports['default'];
+
+/***/ },
+/* 36 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _promise = __webpack_require__(7);
+
+	var _promise2 = _interopRequireDefault(_promise);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	// 设置客服帐号的头像
+
+	var uploadAvatar = function uploadAvatar(core) {
+	  return function (options) {
+	    return new _promise2.default(function (resolve, reject) {
+
+	      try {
+	        resolve(e);
+	      } catch (e) {
+	        reject(e);
+	      }
+	    });
+	  };
+	};
+
+	exports.default = uploadAvatar;
+	module.exports = exports['default'];
+
+/***/ },
+/* 37 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _getMenu = __webpack_require__(38);
+
+	var _getMenu2 = _interopRequireDefault(_getMenu);
+
+	var _createMenu = __webpack_require__(39);
+
+	var _createMenu2 = _interopRequireDefault(_createMenu);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var Menu = function Menu(core) {
+	  return {
+	    getMenu: (0, _getMenu2.default)(core),
+	    createMenu: (0, _createMenu2.default)(core)
+	  };
+	};
+
+	exports.default = Menu;
+	module.exports = exports['default'];
+
+/***/ },
+/* 38 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _regenerator = __webpack_require__(5);
+
+	var _regenerator2 = _interopRequireDefault(_regenerator);
+
+	var _asyncToGenerator2 = __webpack_require__(6);
+
+	var _asyncToGenerator3 = _interopRequireDefault(_asyncToGenerator2);
+
+	var _promise = __webpack_require__(7);
+
+	var _promise2 = _interopRequireDefault(_promise);
+
+	var _request = __webpack_require__(8);
+
+	var _request2 = _interopRequireDefault(_request);
+
+	var _awaitify = __webpack_require__(14);
+
+	var _awaitify2 = _interopRequireDefault(_awaitify);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var METHOD = 'GET';
+	var URL = 'https://api.weixin.qq.com/cgi-bin/menu/get';
+
+	var getMenu = function getMenu(core) {
+
+	  return function () {
+
+	    return new _promise2.default(function () {
+	      var ref = (0, _asyncToGenerator3.default)(_regenerator2.default.mark(function _callee(resolve, reject) {
+	        var query, response, body;
+	        return _regenerator2.default.wrap(function _callee$(_context) {
+	          while (1) {
+	            switch (_context.prev = _context.next) {
+	              case 0:
+	                _context.prev = 0;
+
+	                console.log('[wechat sdk] Start getting menu...');
+
+	                _context.next = 4;
+	                return core.getAccessToken();
+
+	              case 4:
+	                _context.t0 = _context.sent;
+	                query = {
+	                  access_token: _context.t0
+	                };
+
+	                console.log('[wechat sdk] access_token : ' + query.access_token);
+
+	                _context.next = 9;
+	                return (0, _awaitify.awaitify2)(_request2.default)({
+	                  method: METHOD,
+	                  url: URL,
+	                  qs: query
+	                });
+
+	              case 9:
+	                response = _context.sent;
+	                body = JSON.parse(response[1]);
+
+	                if (!body.errcode) {
+	                  _context.next = 13;
+	                  break;
+	                }
+
+	                return _context.abrupt('return', reject(body));
+
+	              case 13:
+	                resolve(body);
+
+	                _context.next = 19;
+	                break;
+
+	              case 16:
+	                _context.prev = 16;
+	                _context.t1 = _context['catch'](0);
+
+	                reject(_context.t1);
+
+	              case 19:
+	              case 'end':
+	                return _context.stop();
+	            }
+	          }
+	        }, _callee, this, [[0, 16]]);
+	      }));
+	      return function (_x, _x2) {
+	        return ref.apply(this, arguments);
+	      };
+	    }());
+	  };
+	};
+
+	exports.default = getMenu;
+	module.exports = exports['default'];
+
+/***/ },
+/* 39 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _regenerator = __webpack_require__(5);
+
+	var _regenerator2 = _interopRequireDefault(_regenerator);
+
+	var _stringify = __webpack_require__(21);
+
+	var _stringify2 = _interopRequireDefault(_stringify);
+
+	var _asyncToGenerator2 = __webpack_require__(6);
+
+	var _asyncToGenerator3 = _interopRequireDefault(_asyncToGenerator2);
+
+	var _promise = __webpack_require__(7);
+
+	var _promise2 = _interopRequireDefault(_promise);
+
+	var _request = __webpack_require__(8);
+
+	var _request2 = _interopRequireDefault(_request);
+
+	var _awaitify = __webpack_require__(14);
+
+	var _awaitify2 = _interopRequireDefault(_awaitify);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var METHOD = 'POST';
+	var URL = 'https://api.weixin.qq.com/cgi-bin/menu/create';
+
+	var createMenu = function createMenu(core) {
+
+	  return function (options) {
+
+	    return new _promise2.default(function () {
+	      var ref = (0, _asyncToGenerator3.default)(_regenerator2.default.mark(function _callee(resolve, reject) {
+	        var body, response, responseBody;
+	        return _regenerator2.default.wrap(function _callee$(_context) {
+	          while (1) {
+	            switch (_context.prev = _context.next) {
+	              case 0:
+	                _context.prev = 0;
+	                body = (0, _stringify2.default)(options);
+	                _context.t0 = METHOD;
+	                _context.t1 = URL;
+	                _context.next = 6;
+	                return core.getAccessToken();
+
+	              case 6:
+	                _context.t2 = _context.sent;
+	                _context.t3 = {
+	                  access_token: _context.t2
+	                };
+	                _context.t4 = body;
+	                _context.t5 = {
+	                  method: _context.t0,
+	                  url: _context.t1,
+	                  qs: _context.t3,
+	                  body: _context.t4
+	                };
+	                _context.next = 12;
+	                return (0, _awaitify.awaitify2)(_request2.default)(_context.t5);
+
+	              case 12:
+	                response = _context.sent;
+
+	                // formData: options,
+	                // form: options.body
+
+
+	                console.log('[wechatsdk] createMenu response:');
+	                responseBody = JSON.parse(response[1]);
+
+	                if (!responseBody.errcode) {
+	                  _context.next = 17;
+	                  break;
+	                }
+
+	                return _context.abrupt('return', reject(responseBody));
+
+	              case 17:
+	                resolve(responseBody);
+
+	                _context.next = 23;
+	                break;
+
+	              case 20:
+	                _context.prev = 20;
+	                _context.t6 = _context['catch'](0);
+
+	                reject(_context.t6);
+
+	              case 23:
+	              case 'end':
+	                return _context.stop();
+	            }
+	          }
+	        }, _callee, this, [[0, 20]]);
+	      }));
+	      return function (_x, _x2) {
+	        return ref.apply(this, arguments);
+	      };
+	    }());
+	  };
+	};
+
+	exports.default = createMenu;
+	module.exports = exports['default'];
+
+/***/ },
+/* 40 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _passiveReply = __webpack_require__(41);
+
+	var _passiveReply2 = _interopRequireDefault(_passiveReply);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var chatMsg = function chatMsg(core) {
+	  return {
+	    passiveReply: (0, _passiveReply2.default)(core)
+	  };
+	};
+
+	exports.default = chatMsg;
+	module.exports = exports['default'];
+
+/***/ },
+/* 41 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _promise = __webpack_require__(7);
+
+	var _promise2 = _interopRequireDefault(_promise);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	/**
+	 * 被动回复消息
+	 * 如果是匹配自动回复,则回复自动回复,
+	 * 没有匹配,回复success,并发送给客服处理
+	 */
+
+	var passiveReply = function passiveReply(core) {
+	  return function (options) {
+	    return new _promise2.default(function (resolve, reject) {
+
+	      try {
+	        resolve(1);
+	      } catch (e) {
+	        reject(e);
+	      }
+	    });
+	  };
+	};
+
+	exports.default = passiveReply;
+	module.exports = exports['default'];
+
+/***/ },
+/* 42 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _getUserAccessToken = __webpack_require__(43);
+
+	var _getUserAccessToken2 = _interopRequireDefault(_getUserAccessToken);
+
+	var _freshUserAccessToken = __webpack_require__(44);
+
+	var _freshUserAccessToken2 = _interopRequireDefault(_freshUserAccessToken);
+
+	var _generateUrl = __webpack_require__(45);
+
+	var _generateUrl2 = _interopRequireDefault(_generateUrl);
+
+	var _getUserInfo = __webpack_require__(46);
+
+	var _getUserInfo2 = _interopRequireDefault(_getUserInfo);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var auth = function auth(core) {
+	  return {
+	    getUserAccessToken: (0, _getUserAccessToken2.default)(core),
+	    freshUserAccessToken: (0, _freshUserAccessToken2.default)(core),
+	    getUserInfo: (0, _getUserInfo2.default)(core),
+	    generateUrl: (0, _generateUrl2.default)(core)
+	  };
+	};
+
+	exports.default = auth;
+	module.exports = exports['default'];
+
+/***/ },
+/* 43 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _regenerator = __webpack_require__(5);
+
+	var _regenerator2 = _interopRequireDefault(_regenerator);
+
+	var _asyncToGenerator2 = __webpack_require__(6);
+
+	var _asyncToGenerator3 = _interopRequireDefault(_asyncToGenerator2);
+
+	var _promise = __webpack_require__(7);
+
+	var _promise2 = _interopRequireDefault(_promise);
+
+	var _request = __webpack_require__(8);
+
+	var _request2 = _interopRequireDefault(_request);
+
+	var _awaitify = __webpack_require__(14);
+
+	var _awaitify2 = _interopRequireDefault(_awaitify);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var URL = 'https://api.weixin.qq.com/sns/oauth2/access_token';
+
+	var getUserAccessToken = function getUserAccessToken(core) {
+
+	  return function (code) {
+
+	    return new _promise2.default(function () {
+	      var ref = (0, _asyncToGenerator3.default)(_regenerator2.default.mark(function _callee(resolve, reject) {
+	        var CODE, APPID, SECRET, response, resData;
+	        return _regenerator2.default.wrap(function _callee$(_context) {
+	          while (1) {
+	            switch (_context.prev = _context.next) {
+	              case 0:
+	                CODE = code;
+	                APPID = core.config.AppID;
+	                SECRET = core.config.AppSecret;
+	                _context.prev = 3;
+	                _context.next = 6;
+	                return (0, _awaitify.awaitify2)(_request2.default)({
+	                  url: URL + '?appid=' + APPID + '&secret=' + SECRET + '&code=' + CODE + '&grant_type=authorization_code',
+	                  method: 'GET'
+	                });
+
+	              case 6:
+	                response = _context.sent;
+	                resData = JSON.parse(response[1]);
+
+	                if (!resData.errcode) {
+	                  _context.next = 10;
+	                  break;
+	                }
+
+	                return _context.abrupt('return', reject(resData));
+
+	              case 10:
+	                resolve(resData);
+
+	                _context.next = 16;
+	                break;
+
+	              case 13:
+	                _context.prev = 13;
+	                _context.t0 = _context['catch'](3);
+
+	                reject(_context.t0);
+
+	              case 16:
+	              case 'end':
+	                return _context.stop();
+	            }
+	          }
+	        }, _callee, this, [[3, 13]]);
+	      }));
+	      return function (_x, _x2) {
+	        return ref.apply(this, arguments);
+	      };
+	    }());
+	  };
+	};
+
+	exports.default = getUserAccessToken;
+	module.exports = exports['default'];
+
+/***/ },
+/* 44 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _regenerator = __webpack_require__(5);
+
+	var _regenerator2 = _interopRequireDefault(_regenerator);
+
+	var _asyncToGenerator2 = __webpack_require__(6);
+
+	var _asyncToGenerator3 = _interopRequireDefault(_asyncToGenerator2);
+
+	var _promise = __webpack_require__(7);
+
+	var _promise2 = _interopRequireDefault(_promise);
+
+	var _request = __webpack_require__(8);
+
+	var _request2 = _interopRequireDefault(_request);
+
+	var _awaitify = __webpack_require__(14);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var METHOD = 'GET';
+	var URL = 'https://api.weixin.qq.com/sns/oauth2/refresh_toke';
+
+	/**
+	 * 刷新access_token
+	 */
+	var freshAccessToken = function freshAccessToken(core) {
+	  return function (options) {
+	    return new _promise2.default(function () {
+	      var ref = (0, _asyncToGenerator3.default)(_regenerator2.default.mark(function _callee(resolve, reject) {
+	        var qs, response, resData;
+	        return _regenerator2.default.wrap(function _callee$(_context) {
+	          while (1) {
+	            switch (_context.prev = _context.next) {
+	              case 0:
+	                _context.prev = 0;
+	                qs = {
+	                  appid: core.config.AppID,
+	                  fresh_token: options.fresh_token,
+	                  grant_type: 'refresh_token'
+	                };
+	                response = (0, _awaitify.awaitify2)(_request2.default)({
+	                  qs: qs,
+	                  url: URL,
+	                  method: METHOD
+	                });
+	                resData = JSON.parse(response[1]);
+
+	                if (!resData.errcode) {
+	                  _context.next = 6;
+	                  break;
+	                }
+
+	                return _context.abrupt('return', reject(resData));
+
+	              case 6:
+	                resolve(resData);
+
+	                _context.next = 12;
+	                break;
+
+	              case 9:
+	                _context.prev = 9;
+	                _context.t0 = _context['catch'](0);
+
+	                reject(_context.t0);
+
+	              case 12:
+	              case 'end':
+	                return _context.stop();
+	            }
+	          }
+	        }, _callee, this, [[0, 9]]);
+	      }));
+	      return function (_x, _x2) {
+	        return ref.apply(this, arguments);
+	      };
+	    }());
+	  };
+	};
+
+	exports.default = freshAccessToken;
+	module.exports = exports['default'];
+
+/***/ },
+/* 45 */
+/***/ function(module, exports) {
+
+	"use strict";
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var generateUrl = function generateUrl(core) {
+
+	  return function (redirectUrl) {
+	    var APPID = core.config.AppID;
+	    var REDIRECT_URL = redirectUrl;
+
+	    return "https://open.weixin.qq.com/connect/oauth2/authorize?appid=" + APPID + "&redirect_uri=" + REDIRECT_URL + "&response_type=code&scope=snsapi_userinfo&connect_redirect=1#wechat_redirect";
+	  };
+	};
+
+	exports.default = generateUrl;
+	module.exports = exports['default'];
+
+/***/ },
+/* 46 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _regenerator = __webpack_require__(5);
+
+	var _regenerator2 = _interopRequireDefault(_regenerator);
+
+	var _asyncToGenerator2 = __webpack_require__(6);
+
+	var _asyncToGenerator3 = _interopRequireDefault(_asyncToGenerator2);
+
+	var _promise = __webpack_require__(7);
+
+	var _promise2 = _interopRequireDefault(_promise);
+
+	var _request = __webpack_require__(8);
+
+	var _request2 = _interopRequireDefault(_request);
+
+	var _awaitify = __webpack_require__(14);
+
+	var _awaitify2 = _interopRequireDefault(_awaitify);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var METHOD = 'GET';
+	var URL = 'https://api.weixin.qq.com/sns/userinfo';
+
+	/**
+	 * 获取用户信息
+	 */
+	var getUserInfo = function getUserInfo(config) {
+
+	  /**
+	   * @param options.openid
+	   * @param options.access_token
+	   */
+	  return function () {
+	    var options = arguments.length <= 0 || arguments[0] === undefined ? { lang: 'zh_CN' } : arguments[0];
+
+	    return new _promise2.default(function () {
+	      var ref = (0, _asyncToGenerator3.default)(_regenerator2.default.mark(function _callee(resolve, reject) {
+	        var qs, response, resData;
+	        return _regenerator2.default.wrap(function _callee$(_context) {
+	          while (1) {
+	            switch (_context.prev = _context.next) {
+	              case 0:
+	                _context.prev = 0;
+	                qs = {
+	                  openid: options.openid,
+	                  access_token: options.access_token,
+	                  lang: options.lang
+	                };
+	                _context.next = 4;
+	                return (0, _awaitify.awaitify2)(_request2.default)({
+	                  method: METHOD,
+	                  url: URL,
+	                  qs: qs
+	                });
+
+	              case 4:
+	                response = _context.sent;
+	                resData = JSON.parse(response[1]);
+
+	                if (!resData.errcode) {
+	                  _context.next = 8;
+	                  break;
+	                }
+
+	                return _context.abrupt('return', reject(resData));
+
+	              case 8:
+	                resolve(resData);
+
+	                _context.next = 14;
+	                break;
+
+	              case 11:
+	                _context.prev = 11;
+	                _context.t0 = _context['catch'](0);
+
+	                reject(_context.t0);
+
+	              case 14:
+	              case 'end':
+	                return _context.stop();
+	            }
+	          }
+	        }, _callee, this, [[0, 11]]);
+	      }));
+	      return function (_x2, _x3) {
+	        return ref.apply(this, arguments);
+	      };
+	    }());
+	  };
+	};
+
+	exports.default = getUserInfo;
+	module.exports = exports['default'];
+
+/***/ },
+/* 47 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _sendMsg = __webpack_require__(48);
+
+	var _setIndustry = __webpack_require__(49);
+
+	var _setIndustry2 = _interopRequireDefault(_setIndustry);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var templateMsg = function templateMsg(core) {
+	  return {
+	    sendMsg: (0, _sendMsg.sendMsg)(core),
+	    setIndustry: (0, _sendMsg.sendMsg)(_setIndustry2.default)
+	  };
+	};
+
+	exports.default = templateMsg;
+	module.exports = exports['default'];
+
+/***/ },
+/* 48 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.sendMsg = undefined;
+
+	var _regenerator = __webpack_require__(5);
+
+	var _regenerator2 = _interopRequireDefault(_regenerator);
+
+	var _asyncToGenerator2 = __webpack_require__(6);
+
+	var _asyncToGenerator3 = _interopRequireDefault(_asyncToGenerator2);
+
+	var _promise = __webpack_require__(7);
+
+	var _promise2 = _interopRequireDefault(_promise);
+
+	var _request = __webpack_require__(8);
+
+	var _request2 = _interopRequireDefault(_request);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var METHOD = 'POST';
+	var URL = 'https://api.weixin.qq.com/cgi-bin/message/template/send';
+
+	// 发送模板消息
+	var sendMsg = function sendMsg(core) {
+	  return function (msg) {
+	    return new _promise2.default(function () {
+	      var ref = (0, _asyncToGenerator3.default)(_regenerator2.default.mark(function _callee(resolve, reject) {
+	        var response;
+	        return _regenerator2.default.wrap(function _callee$(_context) {
+	          while (1) {
+	            switch (_context.prev = _context.next) {
+	              case 0:
+	                _context.t0 = METHOD;
+	                _context.t1 = URL;
+	                _context.next = 4;
+	                return core.getAccessToken();
+
+	              case 4:
+	                _context.t2 = _context.sent;
+	                _context.t3 = {
+	                  method: _context.t0,
+	                  url: _context.t1,
+	                  access_token: _context.t2
+	                };
+	                _context.next = 8;
+	                return (0, _request2.default)(_context.t3);
+
+	              case 8:
+	                response = _context.sent;
+
+
+	                if (response.body.success) {
+	                  resolve(true);
+	                } else {
+	                  reject(response.body);
+	                }
+
+	              case 10:
+	              case 'end':
+	                return _context.stop();
+	            }
+	          }
+	        }, _callee, this);
+	      }));
+	      return function (_x, _x2) {
+	        return ref.apply(this, arguments);
+	      };
+	    }());
+	  };
+	};
+
+	exports.sendMsg = sendMsg;
+
+/***/ },
+/* 49 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _promise = __webpack_require__(7);
+
+	var _promise2 = _interopRequireDefault(_promise);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	// 设置所属行业
+
+	var METHOD = 'GET';
+	var URL = 'https://api.weixin.qq.com/cgi-bin/template/api_set_industry?access_token=ACCESS_TOKEN';
+
+	var setIndustry = function setIndustry(core) {
+	  return function (options) {
+	    return new _promise2.default(function (resolve, reject) {
+
+	      try {
+
+	        resolve(1);
+	      } catch (e) {
+	        reject(e);
+	      }
+	    });
+	  };
+	};
+
+	exports.default = setIndustry;
+	module.exports = exports['default'];
+
+/***/ },
+/* 50 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _material = __webpack_require__(51);
+
+	var _tempMedia = __webpack_require__(52);
+
+	var Media = function Media(core) {
+	  return {
+	    // material
+	    addNews: (0, _material.addNews)(core),
+	    uploadMaterial: (0, _material.uploadMaterial)(core),
+	    uploadNewsImage: (0, _material.uploadNewsImage)(core),
+	    updateNews: (0, _material.updateNews)(core),
+	    getMaterialUrl: (0, _material.getMaterialUrl)(core),
+	    downloadMaterial: (0, _material.downloadMaterial)(core),
+	    getMaterialCount: (0, _material.getMaterialCount)(core),
+	    getMaterialList: (0, _material.getMaterialList)(core),
+	    deleteMaterial: (0, _material.deleteMaterial)(core),
+	    // tempMedia
+	    uploadTempMedia: (0, _tempMedia.uploadTempMedia)(core),
+	    getTempMediaUrl: (0, _tempMedia.getTempMediaUrl)(core),
+	    downloadTempMedia: (0, _tempMedia.downloadTempMedia)(core)
+	  };
+	};
+
+	exports.default = Media;
+	module.exports = exports['default'];
+
+/***/ },
+/* 51 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.deleteMaterial = exports.getMaterialList = exports.getMaterialCount = exports.downloadMaterial = exports.getMaterialUrl = exports.updateNews = exports.uploadNewsImage = exports.uploadMaterial = exports.addNews = undefined;
+
+	var _regenerator = __webpack_require__(5);
+
+	var _regenerator2 = _interopRequireDefault(_regenerator);
+
+	var _stringify = __webpack_require__(21);
+
+	var _stringify2 = _interopRequireDefault(_stringify);
+
+	var _asyncToGenerator2 = __webpack_require__(6);
+
+	var _asyncToGenerator3 = _interopRequireDefault(_asyncToGenerator2);
+
+	var _promise = __webpack_require__(7);
+
+	var _promise2 = _interopRequireDefault(_promise);
+
+	var _request = __webpack_require__(8);
+
+	var _request2 = _interopRequireDefault(_request);
+
+	var _awaitify = __webpack_require__(14);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var addNews = function addNews(core) {};
+
+	var updateNews = function updateNews(core) {};
+
+	var uploadNewsImage = function uploadNewsImage(core) {};
+
+	var getMaterialCount = function getMaterialCount(core) {};
+
+	/**
+	 * 获取永久素材列表
+	 * @param core
+	 */
+	var getMaterialList = function getMaterialList(core) {
+
+	  var URL = 'https://api.weixin.qq.com/cgi-bin/material/batchget_material';
+
+	  /**
+	   * @param options.type
+	   * @param options.offset
+	   * @param options.count
+	   */
+	  return function (options) {
+
+	    return new _promise2.default(function () {
+	      var ref = (0, _asyncToGenerator3.default)(_regenerator2.default.mark(function _callee(resolve, reject) {
+	        var access_token, body, response, resData;
+	        return _regenerator2.default.wrap(function _callee$(_context) {
+	          while (1) {
+	            switch (_context.prev = _context.next) {
+	              case 0:
+	                _context.prev = 0;
+	                _context.next = 3;
+	                return core.getAccessToken();
+
+	              case 3:
+	                access_token = _context.sent;
+	                body = (0, _stringify2.default)(options);
+	                _context.next = 7;
+	                return (0, _awaitify.awaitify2)(_request2.default)({
+	                  method: 'POST',
+	                  url: URL,
+	                  qs: {
+	                    access_token: access_token
+	                  },
+	                  body: body
+	                });
+
+	              case 7:
+	                response = _context.sent;
+
+
+	                console.log('[wechat sdk] get response from getMaterialList...');
+	                console.log(response[1]);
+	                resData = JSON.parse(response[1]);
+
+	                if (!resData.errcode) {
+	                  _context.next = 13;
+	                  break;
+	                }
+
+	                return _context.abrupt('return', reject(resData));
+
+	              case 13:
+	                resolve(resData);
+
+	                _context.next = 19;
+	                break;
+
+	              case 16:
+	                _context.prev = 16;
+	                _context.t0 = _context['catch'](0);
+
+	                reject(_context.t0);
+
+	              case 19:
+	              case 'end':
+	                return _context.stop();
+	            }
+	          }
+	        }, _callee, this, [[0, 16]]);
+	      }));
+	      return function (_x, _x2) {
+	        return ref.apply(this, arguments);
+	      };
+	    }());
+	  };
+	};
+
+	var deleteMaterial = function deleteMaterial(core) {};
+
+	var uploadMaterial = function uploadMaterial(core) {};
+
+	var getMaterialUrl = function getMaterialUrl(core) {
+
+	  var getMaterialURL = 'https://api.weixin.qq.com/cgi-bin/material/get_material';
+	};
+
+	var downloadMaterial = function downloadMaterial(core) {
+
+	  var getMaterialURL = 'https://api.weixin.qq.com/cgi-bin/material/get_material';
+	};
+
+	exports.addNews = addNews;
+	exports.uploadMaterial = uploadMaterial;
+	exports.uploadNewsImage = uploadNewsImage;
+	exports.updateNews = updateNews;
+	exports.getMaterialUrl = getMaterialUrl;
+	exports.downloadMaterial = downloadMaterial;
+	exports.getMaterialCount = getMaterialCount;
+	exports.getMaterialList = getMaterialList;
+	exports.deleteMaterial = deleteMaterial;
+
+/***/ },
+/* 52 */
+/***/ function(module, exports) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	var uploadTempMedia = function uploadTempMedia(core) {
+
+	  var URL = 'https://api.weixin.qq.com/cgi-bin/media/upload';
+	};
+
+	var getTempMediaUrl = function getTempMediaUrl(core) {
+
+	  var URL = 'https://api.weixin.qq.com/cgi-bin/media/get';
+	};
+
+	var downloadTempMedia = function downloadTempMedia(core) {
+	  var URL = 'https://api.weixin.qq.com/cgi-bin/media/get';
+	};
+
+	exports.uploadTempMedia = uploadTempMedia;
+	exports.getTempMediaUrl = getTempMediaUrl;
+	exports.downloadTempMedia = downloadTempMedia;
+
+/***/ }
+/******/ ]);

@@ -6,19 +6,19 @@ const serviceName = packageFile.name
 const nodeExternals = require('webpack-node-externals')
 const _ = require('lodash')
 
-
 module.exports = {
-  context: __dirname
+  context: __dirname,
   //, devtool: 'inline-source-map'
   //, devtool: 'eval'
-  , devtool: false
-  , target: 'node'
-  , entry: {
+  devtool: false,
+  target: 'node',
+  entry: {
     app: './src/index.js'
   },
   output: {
     path: path.join(__dirname, 'dist'),
     //filename: '[name].js'
+    libraryTarget: 'commonjs2',
     filename: 'index.js'
   },
   externals: nodeExternals({
@@ -40,7 +40,7 @@ module.exports = {
         , loader: 'babel'
         , query: {
         presets:['es2015','stage-0']
-        ,plugins: ['transform-runtime']
+        ,plugins: ['transform-runtime', "add-module-exports"]
       }
       }
     ]
@@ -51,13 +51,13 @@ module.exports = {
       //'process.env.NODE_ENV': JSON.stringify('production')
       'process.env.NODE_ENV': JSON.stringify('production')
     })
-    , new webpack.optimize.UglifyJsPlugin({
-      compress: {
-        warnings: false
-      },
-      mangle: {
-        except: ['$super', '$', 'exports', 'require']
-      }
-    })
+    // , new webpack.optimize.UglifyJsPlugin({
+    //   compress: {
+    //     warnings: false
+    //   },
+    //   mangle: {
+    //     except: ['$super', '$', 'exports', 'require']
+    //   }
+    // })
   ]
 }
