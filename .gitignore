@@ -1,5 +1,7 @@
 # keep
 !.keep
-
+.DS_Store
+Thumb.db
+*.log*
 .idea
 node_modules
